@@ -1,5 +1,6 @@
 import { createHeader, initHeader } from '../../components/header/header';
 import { createHero } from '../../components/hero/hero';
+import { initHeroSlider } from '../../components/hero/sliderInit';
 import { createStackedSection, initStackedSection } from './stackedSection';
 import { createAboutSection } from './aboutSection';
 import { createServicesSection } from './servicesSection';
@@ -23,6 +24,7 @@ export function mountHome(root: HTMLElement) {
   frag.appendChild(createFooterSection());
   root.appendChild(frag);
   initHeader();
+  initHeroSlider();
   initStackedSection();
   initTestimonialsRotation();
   initContactForm();
