@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Growth Roots | حلول صناعية متكاملة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+  <!-- All styling now comes from modular CSS imported in main.ts -->
+</head>
+<body class="loading">
+  <div id="app"></div>
+  
+  <div class="app-loader" aria-live="polite" aria-label="جارٍ التحميل">
+    <div class="app-loader-inner">
+      <div class="loader-spinner" role="status" aria-label="Loading"></div>
+      <span>جارٍ التحميل...</span>
+    </div>
+  </div>
+  
+  <!-- External libraries still loaded via CDN (can be migrated later) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r110/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenLite.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/easing/EasePack.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/imagesloaded/4.1.4/imagesloaded.pkgd.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3/dist/ScrollTrigger.min.js"></script>
+  
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>

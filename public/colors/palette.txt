@@ -1,0 +1,38 @@
+/* Coolors Exported Palette - https://coolors.co/296c3f-3f7d46-4f8d49-5a994d-ffffff-f5f5f0-243340-0e1f2d */
+
+- Tailwind
+
+{ 'dark_spring_green': { DEFAULT: '#296c3f', 100: '#08150d', 200: '#102b19', 300: '#184026', 400: '#215632', 500: '#296c3f', 600: '#3da05e', 700: '#61c382', 800: '#96d7ac', 900: '#caebd5' }, 'fern_green': { DEFAULT: '#3f7d46', 100: '#0d190e', 200: '#19321c', 300: '#264b2a', 400: '#336438', 500: '#3f7d46', 600: '#55a85e', 700: '#7fbe86', 800: '#aad4ae', 900: '#d4e9d7' }, 'sea_green': { DEFAULT: '#4f8d49', 100: '#101c0f', 200: '#1f391d', 300: '#2f552c', 400: '#3f713a', 500: '#4f8d49', 600: '#69af63', 700: '#8fc38a', 800: '#b4d7b1', 900: '#daebd8' }, 'asparagus': { DEFAULT: '#5a994d', 100: '#121f0f', 200: '#243d1f', 300: '#365c2e', 400: '#487a3e', 500: '#5a994d', 600: '#76b46a', 700: '#98c78f', 800: '#bbd9b4', 900: '#ddecda' }, 'white': { DEFAULT: '#ffffff', 100: '#333333', 200: '#666666', 300: '#999999', 400: '#cccccc', 500: '#ffffff', 600: '#ffffff', 700: '#ffffff', 800: '#ffffff', 900: '#ffffff' }, 'baby_powder': { DEFAULT: '#f5f5f0', 100: '#3a3a27', 200: '#74744e', 300: '#a7a77b', 400: '#ceceb6', 500: '#f5f5f0', 600: '#f7f7f3', 700: '#f9f9f6', 800: '#fbfbf9', 900: '#fdfdfc' }, 'gunmetal': { DEFAULT: '#243340', 100: '#070a0d', 200: '#0f151a', 300: '#161f27', 400: '#1d2a34', 500: '#243340', 600: '#425e76', 700: '#6287a7', 800: '#97afc4', 900: '#cbd7e2' }, 'rich_black': { DEFAULT: '#0e1f2d', 100: '#030609', 200: '#060d13', 300: '#09131c', 400: '#0c1a25', 500: '#0e1f2d', 600: '#234f73', 700: '#397fb8', 800: '#76aad5', 900: '#bad4ea' } }
+
+- CSV
+
+296c3f,3f7d46,4f8d49,5a994d,ffffff,f5f5f0,243340,0e1f2d
+
+- With #
+
+#296c3f, #3f7d46, #4f8d49, #5a994d, #ffffff, #f5f5f0, #243340, #0e1f2d
+
+- Array
+
+["296c3f","3f7d46","4f8d49","5a994d","ffffff","f5f5f0","243340","0e1f2d"]
+
+- Object
+
+{"Dark spring green":"296c3f","Fern green":"3f7d46","Sea green":"4f8d49","Asparagus":"5a994d","White":"ffffff","Baby powder":"f5f5f0","Gunmetal":"243340","Rich black":"0e1f2d"}
+
+- Extended Array
+
+[{"name":"Dark spring green","hex":"296c3f","rgb":[41,108,63],"cmyk":[62,0,42,58],"hsb":[140,62,42],"hsl":[140,45,29],"lab":[41,-32,19]},{"name":"Fern green","hex":"3f7d46","rgb":[63,125,70],"cmyk":[50,0,44,51],"hsb":[127,50,49],"hsl":[127,33,37],"lab":[47,-33,24]},{"name":"Sea green","hex":"4f8d49","rgb":[79,141,73],"cmyk":[44,0,48,45],"hsb":[115,48,55],"hsl":[115,32,42],"lab":[53,-34,30]},{"name":"Asparagus","hex":"5a994d","rgb":[90,153,77],"cmyk":[41,0,50,40],"hsb":[110,50,60],"hsl":[110,33,45],"lab":[58,-36,34]},{"name":"White","hex":"ffffff","rgb":[255,255,255],"cmyk":[0,0,0,0],"hsb":[0,0,100],"hsl":[0,0,100],"lab":[100,0,0]},{"name":"Baby powder","hex":"f5f5f0","rgb":[245,245,240],"cmyk":[0,0,2,4],"hsb":[60,2,96],"hsl":[60,20,95],"lab":[96,-1,2]},{"name":"Gunmetal","hex":"243340","rgb":[36,51,64],"cmyk":[44,20,0,75],"hsb":[208,44,25],"hsl":[208,28,20],"lab":[20,-2,-10]},{"name":"Rich black","hex":"0e1f2d","rgb":[14,31,45],"cmyk":[69,31,0,82],"hsb":[207,69,18],"hsl":[207,53,12],"lab":[11,-2,-12]}]
+
+- XML
+
+<palette>
+  <color name="Dark spring green" hex="296c3f" r="41" g="108" b="63" />
+  <color name="Fern green" hex="3f7d46" r="63" g="125" b="70" />
+  <color name="Sea green" hex="4f8d49" r="79" g="141" b="73" />
+  <color name="Asparagus" hex="5a994d" r="90" g="153" b="77" />
+  <color name="White" hex="ffffff" r="255" g="255" b="255" />
+  <color name="Baby powder" hex="f5f5f0" r="245" g="245" b="240" />
+  <color name="Gunmetal" hex="243340" r="36" g="51" b="64" />
+  <color name="Rich black" hex="0e1f2d" r="14" g="31" b="45" />
+</palette>

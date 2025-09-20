@@ -1,0 +1,14 @@
+/* Base reset + variables */
+:root { --accent:#ffcc33; --bg-dark:#23272A; --font-family:'Cairo', sans-serif; }
+html { background:#fff; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale; }
+body { margin:0; font-family:var(--font-family); background:var(--bg-dark); color:#fff; overflow-x:hidden; }
+*,*::before,*::after { box-sizing:border-box; }
+img { max-width:100%; display:block; }
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
+
+/* Loader overlay */
+body.loading .app-loader { opacity:1; pointer-events:auto; }
+.app-loader { position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(17,18,19,0.85); backdrop-filter:blur(6px); -webkit-backdrop-filter:blur(6px); z-index:200; opacity:0; pointer-events:none; transition:opacity .4s ease; }
+.app-loader-inner { display:flex; flex-direction:column; align-items:center; gap:14px; font-size:14px; letter-spacing:.5px; color:#fff; }
+.loader-spinner { width:42px; height:42px; border:4px solid rgba(255,255,255,0.15); border-top-color:var(--accent); border-radius:50%; animation:spin 1s linear infinite; }
+@keyframes spin { to { transform:rotate(360deg); } }
