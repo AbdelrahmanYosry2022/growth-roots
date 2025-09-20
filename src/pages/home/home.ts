@@ -8,13 +8,13 @@ import { createProductsSolutionsSection } from './productsSolutionsSection';
 import { createTestimonialsSection, initTestimonialsRotation } from './testimonialsSection';
 import { createContactSection, initContactForm } from './contactSection';
 import { createFooterSection, initFooter } from './footerSection';
-import { createDownArrow } from './downArrow';
+
 
 export function mountHome(root: HTMLElement) {
   const frag = document.createDocumentFragment();
   frag.appendChild(createHeader());
   frag.appendChild(createHero());
-  frag.appendChild(createDownArrow());
+
   frag.appendChild(createStackedSection());
   frag.appendChild(createAboutSection());
   frag.appendChild(createServicesSection());

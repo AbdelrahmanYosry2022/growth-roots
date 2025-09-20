@@ -98,11 +98,11 @@ footer.site-footer { background:#121314; color:#d2d2d4; padding:90px 24px 40px; 
 .stack-card .card-subtitle { font-size:1.05rem; line-height:1.55; margin:0; opacity:.85; }
 .stack-card .card-image-container { width:50%; height:100%; position:relative; overflow:hidden; }
 .stack-card .card-image { position:absolute; inset:-5% auto auto -5%; width:110%; height:110%; object-fit:cover; }
-.stack-card.layer-1 { background:#296c3f; z-index:1; }
-.stack-card.layer-2 { background:#3f7d46; z-index:2; }
-.stack-card.layer-3 { background:#4f8d49; z-index:3; }
-.stack-card.layer-4 { background:#5a994d; z-index:4; }
-.stack-card.layer-5 { background:#76b46a; z-index:5; }
+.stack-card.layer-1 { background:#296c3f; z-index:10; }
+.stack-card.layer-2 { background:#3f7d46; z-index:11; }
+.stack-card.layer-3 { background:#4f8d49; z-index:12; }
+.stack-card.layer-4 { background:#5a994d; z-index:13; }
+.stack-card.layer-5 { background:#76b46a; z-index:14; }
 .stack-card.layer-1 .card-title, .stack-card.layer-1 .card-subtitle, .stack-card.layer-2 .card-title, .stack-card.layer-2 .card-subtitle, .stack-card.layer-3 .card-title, .stack-card.layer-3 .card-subtitle, .stack-card.layer-4 .card-title, .stack-card.layer-4 .card-subtitle, .stack-card.layer-5 .card-title, .stack-card.layer-5 .card-subtitle { color:#fff; }
 .stack-card .img-ph { position:absolute; inset:0; background:linear-gradient(120deg,#d7d6c8,#ecebdf); filter:blur(2px); animation:phPulse 1.8s ease-in-out infinite; }
 .stack-card .card-image { opacity:0; transition:opacity .6s ease; }

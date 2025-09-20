@@ -24,5 +24,60 @@
 #slide-progress span { display:block; height:100%; width:0; background:var(--accent,#ffcc33); }
 .visually-hidden { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0; }
 
+/* أزرار التنقل العمودي */
+.vertical-nav {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 800px) {
+  .vertical-nav {
+    right: 40px;
+  }
+}
+
+.nav-btn {
+  width: 48px;
+  height: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #fff;
+  padding: 0;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.nav-btn:active {
+  transform: scale(0.95);
+}
+
+.nav-btn svg {
+  transition: transform 0.2s ease;
+}
+
+.nav-btn:hover svg {
+  transform: translateY(-1px);
+}
+
+.nav-down:hover svg {
+  transform: translateY(1px);
+}
+
 /* Remove old loading pseudo overlay (now using .app-loader) */
 @keyframes loaderAnim { to { opacity:1; transform:scale3d(.5,.5,1); } }

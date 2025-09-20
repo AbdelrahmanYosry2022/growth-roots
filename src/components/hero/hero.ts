@@ -1,5 +1,6 @@
 import { createFragment } from '../../core/utils';
 import { initHeroSlider } from './sliderInit';
+import { createVerticalNavigation } from '../../pages/home/verticalNavigation';
 
 export function createHero(){
   const container = document.createElement('section');
@@ -20,6 +21,8 @@ export function createHero(){
           <button data-slide="3" aria-label="الانتقال إلى الشريحة 4" role="tab" aria-selected="false"></button>
         </div>
         <div id="slide-progress" class="slide-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="تقدم الشرائح"><span></span></div>
+        
+
       </div>
       <div class="hero-overlay">
         <div class="hero-content">
@@ -46,6 +49,11 @@ export function createHero(){
     const slider = container.querySelector('#slider');
     if(slider){ slider.classList.add('fallback-active'); }
     initHeroSlider();
+    
+    // إضافة أزرار التنقل العمودي
+    const verticalNav = createVerticalNavigation();
+    container.appendChild(verticalNav);
+    
     // Remove fallback once loading class removed (loop a few times)
     let tries=0; const clearIntervalId=setInterval(()=>{
       if(!document.body.classList.contains('loading')){ slider?.classList.remove('fallback-active'); clearInterval(clearIntervalId); }

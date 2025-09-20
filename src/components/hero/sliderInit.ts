@@ -140,9 +140,11 @@ export function initHeroSlider() {
 
     const addEvents = function () {
       const pagButtons = Array.from(document.getElementById('pagination')!.querySelectorAll('button')) as HTMLButtonElement[];
-      let isAnimating = false;
-      let currentSlide = 0;
-      let autoplayTimer: number | undefined;
+       const progressBar = document.querySelector('#slide-progress span') as HTMLElement;
+       let isAnimating = false;
+       let currentSlide = 0;
+       let autoplayTimer: number | undefined;
+       let progressTimer: number | undefined;
 
       const setActive = (i: number) => {
         document.querySelector('#pagination button.active')?.classList.remove('active');
@@ -155,10 +157,14 @@ export function initHeroSlider() {
         isAnimating = true;
         currentSlide = slideId;
         
-        // Clear existing autoplay
-        if (autoplayTimer) {
-          clearTimeout(autoplayTimer);
-        }
+        // Clear existing autoplay and reset progress
+         if (autoplayTimer) {
+           clearTimeout(autoplayTimer);
+         }
+         if (progressTimer) {
+           clearTimeout(progressTimer);
+         }
+         resetProgressBar();
 
         setActive(slideId);
         mat.uniforms.nextImage.value = sliderImages[slideId];
@@ -220,15 +226,38 @@ export function initHeroSlider() {
         });
       };
 
-      const startAutoplay = () => {
-        if (autoplayTimer) {
-          clearTimeout(autoplayTimer);
-        }
-        autoplayTimer = window.setTimeout(() => {
-          const nextSlide = (currentSlide + 1) % sliderImages.length;
-          transitionTo(nextSlide);
-        }, 3000);
-      };
+      const updateProgressBar = () => {
+         if (progressBar) {
+           progressBar.style.width = '0%';
+           progressBar.style.transition = 'width 3000ms linear';
+           // Force reflow
+           progressBar.offsetHeight;
+           progressBar.style.width = '100%';
+         }
+       };
+
+       const resetProgressBar = () => {
+         if (progressBar) {
+           progressBar.style.transition = 'none';
+           progressBar.style.width = '0%';
+         }
+       };
+
+       const startAutoplay = () => {
+         if (autoplayTimer) {
+           clearTimeout(autoplayTimer);
+         }
+         if (progressTimer) {
+           clearTimeout(progressTimer);
+         }
+         
+         updateProgressBar();
+         
+         autoplayTimer = window.setTimeout(() => {
+           const nextSlide = (currentSlide + 1) % sliderImages.length;
+           transitionTo(nextSlide);
+         }, 3000);
+       };
 
       // Add click events to pagination buttons
       pagButtons.forEach(btn => {
