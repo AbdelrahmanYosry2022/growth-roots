@@ -1,3 +1,5 @@
+import './verticalNavigation.css';
+
 export function createVerticalNavigation() {
   const navContainer = document.createElement('div');
   navContainer.className = 'vertical-nav';
@@ -106,4 +108,34 @@ export function createVerticalNavigation() {
   });
   
   return navContainer;
+}
+
+// وظيفة لتهيئة التنقل العمودي
+export function initVerticalNavigation() {
+  const navContainer = document.querySelector('.vertical-nav');
+  if (navContainer) {
+    // إظهار التنقل عند التمرير إلى السيكشن الثاني
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          navContainer.classList.add('visible');
+        } else {
+          navContainer.classList.remove('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    const stackedSection = document.querySelector('.stacked-cards-container');
+    if (stackedSection) {
+      observer.observe(stackedSection);
+    }
+  }
+}
+
+// وظيفة لإزالة التنقل العمودي
+export function removeVerticalNavigation() {
+  const navContainer = document.querySelector('.vertical-nav');
+  if (navContainer) {
+    navContainer.remove();
+  }
 }

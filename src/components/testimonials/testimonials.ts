@@ -1,3 +1,10 @@
+/**
+ * Testimonials Component - Isolated and Reusable
+ * مكون الشهادات مع عزل كامل للأكواد
+ */
+
+import './testimonials.css';
+
 export function createTestimonialsSection(){
   const sec = document.createElement('section');
   sec.className='testimonials-section';
@@ -28,4 +35,15 @@ export function initTestimonialsRotation(){
   function schedule(){ clearTimeout(timer); timer=setTimeout(next,6000); }
   dots.forEach(d=> d.addEventListener('click',()=>{ activate(parseInt(d.dataset.to||'0')); schedule(); }));
   schedule();
+}
+
+export function initTestimonials(): void {
+  initTestimonialsRotation();
+}
+
+export function removeTestimonials(): void {
+  const section = document.querySelector('.testimonials-section');
+  if (section) {
+    section.remove();
+  }
 }

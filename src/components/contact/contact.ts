@@ -1,3 +1,10 @@
+/**
+ * Contact Component - Isolated and Reusable
+ * مكون الاتصال مع عزل كامل للأكواد
+ */
+
+import './contact.css';
+
 export function createContactSection(){
   const sec = document.createElement('section');
   sec.id='contact';
@@ -39,4 +46,15 @@ export function initContactForm(){
     status.textContent='... جارٍ الإرسال';
     setTimeout(()=>{ status.textContent='تم استلام رسالتك بنجاح. سنعاود الاتصال قريباً.'; form.reset(); },1100);
   });
+}
+
+export function initContact(): void {
+  initContactForm();
+}
+
+export function removeContact(): void {
+  const section = document.querySelector('.contact-section');
+  if (section) {
+    section.remove();
+  }
 }

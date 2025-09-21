@@ -1,3 +1,4 @@
+import './header.css';
 import { createFragment } from '../../core/utils';
 
 export function createHeader(){

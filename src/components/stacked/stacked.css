@@ -1,0 +1,250 @@
+/* Stacked Component - Isolated Styles */
+.stacked-component { 
+  background: #f5f5f0; 
+  color: #18191a; 
+  position: relative; 
+}
+
+.stacked-component .stacked-hero { 
+  width: 100%; 
+  min-height: 80vh; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  padding: 0 2rem; 
+}
+
+.stacked-component .stacked-hero h2 { 
+  font-size: 3.2rem; 
+  line-height: 1.15; 
+  letter-spacing: -0.02em; 
+  margin: 0; 
+  font-weight: 700; 
+  text-align: center; 
+  max-width: 1400px; 
+  color: #5b5a36; 
+}
+
+.stacked-component .stacked-divider { 
+  width: 100%; 
+  height: 1px; 
+  border-bottom: 1px dotted rgba(91, 90, 54, 0.35); 
+}
+
+.stacked-component .stacked-cards-container { 
+  width: 100%; 
+  height: 100vh; 
+  position: relative; 
+  overflow: hidden; 
+  background: #f5f5f0; 
+}
+
+.stacked-component .stack-card { 
+  position: absolute; 
+  inset: 0 auto auto 0; 
+  width: 100%; 
+  height: 520px; 
+  display: flex; 
+  overflow: hidden; 
+}
+
+.stacked-component .stack-card .card-content { 
+  width: 50%; 
+  padding: 1.2rem 1.4rem 1.4rem; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+}
+
+.stacked-component .stack-card .card-title { 
+  font-size: 2.4rem; 
+  font-weight: 700; 
+  margin: 0 0 0.6rem; 
+  line-height: 1.15; 
+}
+
+.stacked-component .stack-card .card-subtitle { 
+  font-size: 1.05rem; 
+  line-height: 1.55; 
+  margin: 0; 
+  opacity: 0.85; 
+}
+
+.stacked-component .stack-card .card-image-container { 
+  width: 50%; 
+  height: 100%; 
+  position: relative; 
+  overflow: hidden; 
+}
+
+.stacked-component .stack-card .card-image { 
+  position: absolute; 
+  inset: -5% auto auto -5%; 
+  width: 110%; 
+  height: 110%; 
+  object-fit: cover; 
+}
+
+/* Layer Colors */
+.stacked-component .stack-card.layer-1 { 
+  background: #296c3f; 
+  z-index: 10; 
+}
+
+.stacked-component .stack-card.layer-2 { 
+  background: #3f7d46; 
+  z-index: 11; 
+}
+
+.stacked-component .stack-card.layer-3 { 
+  background: #4f8d49; 
+  z-index: 12; 
+}
+
+.stacked-component .stack-card.layer-4 { 
+  background: #5a994d; 
+  z-index: 13; 
+}
+
+.stacked-component .stack-card.layer-5 { 
+  background: #76b46a; 
+  z-index: 14; 
+}
+
+/* Text Colors for All Layers */
+.stacked-component .stack-card.layer-1 .card-title,
+.stacked-component .stack-card.layer-1 .card-subtitle,
+.stacked-component .stack-card.layer-2 .card-title,
+.stacked-component .stack-card.layer-2 .card-subtitle,
+.stacked-component .stack-card.layer-3 .card-title,
+.stacked-component .stack-card.layer-3 .card-subtitle,
+.stacked-component .stack-card.layer-4 .card-title,
+.stacked-component .stack-card.layer-4 .card-subtitle,
+.stacked-component .stack-card.layer-5 .card-title,
+.stacked-component .stack-card.layer-5 .card-subtitle { 
+  color: #fff; 
+}
+
+/* Image Loading States */
+.stacked-component .stack-card .img-ph { 
+  position: absolute; 
+  inset: 0; 
+  background: linear-gradient(120deg, #d7d6c8, #ecebdf); 
+  filter: blur(2px); 
+  animation: stacked-phPulse 1.8s ease-in-out infinite; 
+}
+
+.stacked-component .stack-card .card-image { 
+  opacity: 0; 
+  transition: opacity 0.6s ease; 
+}
+
+.stacked-component .stack-card .card-image.loaded { 
+  opacity: 1; 
+}
+
+@keyframes stacked-phPulse { 
+  0%, 100% { opacity: 0.6; } 
+  50% { opacity: 0.3; } 
+}
+
+/* Progress Bar */
+.stacked-component .stack-progress { 
+  position: fixed; 
+  top: 50%; 
+  transform: translateY(-50%); 
+  right: 22px; 
+  width: 6px; 
+  height: 220px; 
+  background: rgba(255, 255, 255, 0.15); 
+  border-radius: 8px; 
+  z-index: 60; 
+  overflow: hidden; 
+  display: none; 
+}
+
+.stacked-component .stack-progress span { 
+  display: block; 
+  width: 100%; 
+  height: 0%; 
+  background: var(--accent, #ffcc33); 
+  transition: height 0.15s linear; 
+}
+
+/* Desktop Progress Bar */
+@media (min-width: 901px) { 
+  .stacked-component .stack-progress { 
+    display: block; 
+  } 
+}
+
+/* Mobile Styles */
+@media (max-width: 900px) { 
+  .stacked-component .stacked-cards-container { 
+    height: auto; 
+    display: flex; 
+    overflow-x: auto; 
+    scroll-snap-type: x mandatory; 
+    gap: 16px; 
+    padding: 0 16px 32px; 
+  } 
+  
+  .stacked-component .stack-card { 
+    position: relative; 
+    inset: auto; 
+    flex: 0 0 82%; 
+    height: auto; 
+    scroll-snap-align: center; 
+    border-radius: 24px; 
+  } 
+  
+  .stacked-component .stack-card .card-image-container { 
+    height: 200px; 
+  } 
+  
+  .stacked-component .stack-card .card-image { 
+    position: absolute; 
+    inset: 0; 
+    width: 100%; 
+    height: 100%; 
+  } 
+}
+
+/* Mobile Layout Adjustments */
+@media (max-width: 900px) { 
+  .stacked-component .stacked-hero h2 { 
+    font-size: 2.2rem; 
+  } 
+  
+  .stacked-component .stack-card { 
+    flex-direction: column; 
+    height: auto; 
+  } 
+  
+  .stacked-component .stack-card .card-content, 
+  .stacked-component .stack-card .card-image-container { 
+    width: 100%; 
+  } 
+  
+  .stacked-component .stack-card .card-image-container { 
+    height: 220px; 
+    order: -1; 
+  } 
+  
+  .stacked-component .stack-card .card-title { 
+    font-size: 1.9rem; 
+  } 
+}
+
+/* Screen Reader Only */
+.stacked-component .sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

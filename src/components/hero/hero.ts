@@ -1,6 +1,8 @@
+import './hero.css';
 import { createFragment } from '../../core/utils';
 import { initHeroSlider } from './sliderInit';
-import { createVerticalNavigation } from '../../pages/home/verticalNavigation';
+import { createVerticalNavigation, initVerticalNavigation } from '../verticalNavigation/verticalNavigation';
+
 
 export function createHero(){
   const container = document.createElement('section');
@@ -53,6 +55,11 @@ export function createHero(){
     // إضافة أزرار التنقل العمودي
     const verticalNav = createVerticalNavigation();
     container.appendChild(verticalNav);
+    
+    // تهيئة التنقل العمودي
+    initVerticalNavigation();
+    
+
     
     // Remove fallback once loading class removed (loop a few times)
     let tries=0; const clearIntervalId=setInterval(()=>{
