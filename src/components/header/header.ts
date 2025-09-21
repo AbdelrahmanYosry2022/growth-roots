@@ -10,16 +10,18 @@ export function createHeader(){
         <a href="#about">من نحن</a>
         <a href="#partners">شركاؤنا</a>
         <a href="#contact">تواصل معنا</a>
+  <a href="/test-outsource.html" data-external-page>Test Out Source</a>
       </nav>
       <a href="#consult" class="cta-link">اطلب استشارة</a>
       <button class="burger" aria-label="القائمة"><span></span></button>
     </div>
   </header>
   <div class="mobile-nav" role="dialog" aria-modal="true" aria-label="القائمة الرئيسية">
-    <a class="active" href="#solutions">حلولنا</a>
-    <a href="#about">من نحن</a>
-    <a href="#partners">شركاؤنا</a>
-    <a href="#contact">تواصل معنا</a>
+  <a class="active" href="#solutions">حلولنا</a>
+  <a href="#about">من نحن</a>
+  <a href="#partners">شركاؤنا</a>
+  <a href="#contact">تواصل معنا</a>
+  <a href="/test-outsource.html" data-external-page>Test Out Source</a>
     <a href="#consult" class="cta-link" style="font-size:20px;">اطلب استشارة</a>
   </div>
   <div class="dim-overlay"></div>
@@ -32,10 +34,17 @@ export function initHeader(){
   const mobileNav = document.querySelector('.mobile-nav');
   const dim = document.querySelector('.dim-overlay');
   let lastScroll = 0;
+  function updateActive(){
+    const path = window.location.pathname;
+    const links = document.querySelectorAll('nav.desktop-nav a[data-external-page], .mobile-nav a[data-external-page]');
+    links.forEach(l=>{ if((l as HTMLAnchorElement).getAttribute('href') === '/test-outsource.html'){ if(path.endsWith('test-outsource.html')) l.classList.add('active'); else l.classList.remove('active'); } });
+  }
   const closeMenu = () => { burger && burger.classList.remove('active'); mobileNav && mobileNav.classList.remove('open'); dim && dim.classList.remove('active'); (document.body as any).style.overflow=''; };
   burger && burger.addEventListener('click',()=>{ burger.classList.toggle('active'); mobileNav && mobileNav.classList.toggle('open'); dim && dim.classList.toggle('active'); const open = burger.classList.contains('active'); (document.body as any).style.overflow = open ? 'hidden' : ''; });
   dim && dim.addEventListener('click', closeMenu);
   mobileNav && mobileNav.querySelectorAll('a').forEach(a=> a.addEventListener('click', closeMenu));
+  window.addEventListener('popstate', updateActive);
+  updateActive();
   window.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
   window.addEventListener('scroll',()=>{ const y = window.scrollY || document.documentElement.scrollTop; if(!header) return; if(y>40 && y>lastScroll){ header.classList.add('scrolled'); } else if(y<10){ header.classList.remove('scrolled'); } lastScroll = y; });
 }

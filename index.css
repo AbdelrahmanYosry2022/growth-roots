@@ -114,6 +114,54 @@ footer.site-footer { background:#121314; color:#d2d2d4; padding:90px 24px 40px; 
 @media (max-width:900px){ .stacked-cards-container { height:auto; display:flex; overflow-x:auto; scroll-snap-type:x mandatory; gap:16px; padding:0 16px 32px; } .stack-card { position:relative; inset:auto; flex:0 0 82%; height:auto; scroll-snap-align:center; border-radius:24px; } .stack-card .card-image-container { height:200px; } .stack-card .card-image { position:absolute; inset:0; width:100%; height:100%; } }
 @media (max-width:900px){ .stacked-hero h2 { font-size:2.2rem; } .stack-card { flex-direction:column; height:auto; } .stack-card .card-content, .stack-card .card-image-container { width:100%; } .stack-card .card-image-container { height:220px; order:-1; } .stack-card .card-title { font-size:1.9rem; } }
 
+/* أزرار التنقل العمودي */
+.vertical-nav {
+  position: fixed;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.nav-btn {
+  width: 50px;
+  height: 50px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.nav-btn:hover:not(.disabled) {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: scale(1.1);
+}
+
+.nav-btn.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.nav-btn svg {
+  transition: transform 0.3s ease;
+}
+
+.nav-btn:hover:not(.disabled) svg {
+  transform: scale(1.2);
+}
+
 /* Products & Solutions (CodePen-inspired) */
 .products-solutions { background:#111315; padding:120px 26px 140px; color:#fff; position:relative; }
 .ps-container { max-width:1280px; margin:0 auto; }
