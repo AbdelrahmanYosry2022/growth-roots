@@ -35,17 +35,17 @@ const update = () => {
         },
       })
       .from(
-        '.scaler img',
+        '.scaler img, .scaler video',
         {
-          height: window.innerHeight - 32,
+          height: (window.innerHeight * 0.6) - 32,
           ease: 'power1.inOut',
         },
         0
       )
       .from(
-        '.scaler img',
+        '.scaler img, .scaler video',
         {
-          width: window.innerWidth - 32,
+          width: (window.innerWidth * 0.6) - 32,
           ease: 'power2.inOut',
         },
         0
@@ -109,7 +109,7 @@ const update = () => {
         0
       )
   } else {
-    gsap.set(['.scaler img', '.layer'], {
+    gsap.set(['.scaler img', '.scaler video', '.layer'], {
       attr: {
         style: undefined,
       },
