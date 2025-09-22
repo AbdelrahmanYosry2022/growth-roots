@@ -49,22 +49,22 @@
 }
 
 .stacked-component .stack-card .card-content { 
-  width: 50%; 
-  padding: 1.2rem 1.4rem 1.4rem; 
+  width: 60%; 
+  padding: 0rem 8rem 14rem 3rem; 
   display: flex; 
   flex-direction: column; 
   justify-content: center; 
 }
 
 .stacked-component .stack-card .card-title { 
-  font-size: 2.4rem; 
+  font-size: 4rem; 
   font-weight: 700; 
-  margin: 0 0 0.6rem; 
+  margin: 0 0 1rem; 
   line-height: 1.15; 
 }
 
 .stacked-component .stack-card .card-subtitle { 
-  font-size: 1.05rem; 
+  font-size: 1.5rem; 
   line-height: 1.55; 
   margin: 0; 
   opacity: 0.85; 
@@ -167,7 +167,7 @@
   display: block; 
   width: 100%; 
   height: 0%; 
-  background: var(--accent, #ffcc33); 
+  background: #ffffff; /* changed from accent yellow to white per request */ 
   transition: height 0.15s linear; 
 }
 

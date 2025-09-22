@@ -3,6 +3,7 @@ import { createHeader, initHeader } from '../../components/header/header';
 import { createHero } from '../../components/hero/hero';
 import { initHeroSlider } from '../../components/hero/sliderInit';
 import { createFooter, initFooter } from '../../components/footer/footer';
+import { createStacked, initStacked } from '../../components/stacked/stacked';
 import './standaloneShowcase.css';
 
 // إدراج GSAP ديناميكيًا لنسخة من النمط المستقل
@@ -23,6 +24,26 @@ async function loadGSAP() {
 const hasScrollSupport = CSS.supports(
   '(animation-timeline: view()) and (animation-range: 0 100%)'
 );
+
+// دالة لإنشاء القسم النصي الجديد
+function createTextSection() {
+  const section = document.createElement('section');
+  section.className = 'text-section';
+  
+  section.innerHTML = `
+    <div class="text-content">
+      <div class="logo-container">
+        <img src="/logo/Asset%202.svg" alt="جروث روتس" class="section-logo" />
+      </div>
+      <h1 class="main-title">نحوّل رؤيتك<br/>إلى مصنع ناجح</h1>
+      <p class="subtitle">
+        جروث روتس تقدم حلولاً متكاملة لتأسيس وتشغيل وتطوير مصانع اللحوم والدواجن والمنتجات البروتينية: من دراسات الجدوى والتصميم والتجهيز بالمعدات، مروراً بإدارة العمليات والتدريب وتطوير المنتجات، وحتى توريد الخامات وإعادة هيكلة المصانع المتعثرة. شريك موثوق في كل مرحلة.
+      </p>
+    </div>
+  `;
+
+  return section;
+}
 
 // دالة لإنشاء القسم المستقل تماما كما في test-outsource-standalone
 function createStandaloneShowcase() {
@@ -192,8 +213,14 @@ export async function mountNewHome(root: HTMLElement) {
   frag.appendChild(createHeader());
   frag.appendChild(createHero());
 
+  // القسم النصي الجديد
+  frag.appendChild(createTextSection());
+
   // القسم المستقل من test-outsource-standalone
   frag.appendChild(createStandaloneShowcase());
+
+  // إضافة مكون stacked
+  frag.appendChild(createStacked());
 
   // فوتر قياسي
   frag.appendChild(createFooter());
@@ -204,6 +231,9 @@ export async function mountNewHome(root: HTMLElement) {
   initHeader();
   initHeroSlider();
   initFooter();
+
+  // تهيئة مكون stacked
+  initStacked();
 
   // تهيئة الرسوم المتحركة للقسم المستقل
   await initStandaloneAnimations();

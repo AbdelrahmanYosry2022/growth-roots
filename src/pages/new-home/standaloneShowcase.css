@@ -1,10 +1,99 @@
 /* Standalone showcase CSS - مأخوذ من test-outsource-standalone/style.css */
 .standalone-showcase {
   font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif !important;
+  background: #0e1f2d !important;
+  color: #fff !important;
 }
 
 .standalone-showcase * {
   font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif !important;
+}
+
+.standalone-showcase .content-wrap {
+  background: #0e1f2d !important;
+}
+
+/* Text Section Styles */
+.text-section {
+  background: #0e1f2d !important;
+  color: #fff !important;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding: 80px 24rem;
+  font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif !important;
+}
+
+.text-content {
+  max-width: 1200px;
+  text-align: right;
+  direction: rtl;
+}
+
+.logo-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: flex-first;
+}
+
+.section-logo {
+  width: 80px;
+  height: auto;
+  
+}
+
+.text-content .main-title {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 2rem 0;
+  font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif !important;
+}
+
+.text-content .subtitle {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  margin: 0;
+  opacity: 0.9;
+  max-width: 800px;
+  font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif !important;
+  font-weight: 400;
+}
+
+/* Responsive adjustments for text section */
+@media (max-width: 768px) {
+  .text-section {
+    padding: 60px 1rem;
+    min-height: 80vh;
+  }
+  
+  .section-logo {
+    width: 100px;
+  }
+  
+  .text-content .main-title {
+    font-size: 48px;
+  }
+  
+  .text-content .subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-logo {
+    width: 80px;
+  }
+  
+  .text-content .main-title {
+    font-size: 36px;
+  }
+  
+  .text-content .subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
 }
 
 /* Variables and keyframes */

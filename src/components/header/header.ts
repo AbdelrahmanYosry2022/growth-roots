@@ -3,8 +3,11 @@ import { createFragment } from '../../core/utils';
 
 export function createHeader(){
   return createFragment(`
-  <header>
-    <div class="inner">
+  <header class="liquidGlass-wrapper">
+    <div class="liquidGlass-effect"></div>
+    <div class="liquidGlass-tint"></div>
+    <div class="liquidGlass-shine"></div>
+    <div class="liquidGlass-text inner">
       <div class="logo"><img src="/logo/Asset%202.svg" alt="جروث روتس" loading="lazy"></div>
       <nav class="desktop-nav" aria-label="التنقل الرئيسي">
         <a class="active" href="#solutions">حلولنا</a>
@@ -12,7 +15,7 @@ export function createHeader(){
         <a href="#partners">شركاؤنا</a>
         <a href="#contact">تواصل معنا</a>
         <a href="#" data-page="new-home">الصفحة الجديدة</a>
-  <a href="/test-outsource-standalone/" data-external-page>الصفحة المستقلة</a>
+        <a href="/test-outsource-standalone/" data-external-page>الصفحة المستقلة</a>
       </nav>
       <a href="#consult" class="cta-link">اطلب استشارة</a>
       <button class="burger" aria-label="القائمة"><span></span></button>

@@ -134,13 +134,7 @@ export function initStacked(): void {
   const cards = Array.from(document.querySelectorAll('.stacked-component .stack-card')) as HTMLElement[];
   if (!cards.length) return;
 
-  // ربط زر السهم السفلي إذا كان موجوداً
-  const downArrow = document.getElementById('down-arrow');
-  if (downArrow) {
-    downArrow.addEventListener('click', () => {
-      document.querySelector('.about-section')?.scrollIntoView({ behavior: 'smooth' });
-    });
-  }
+  // تم إزالة أزرار الأسهم بناءً على طلب المستخدم
 
   // تحسين تحميل الصور (LQIP)
   setupImageLoading(cards);
@@ -234,7 +228,7 @@ function setupAnimations(cards: HTMLElement[]): void {
  * إعداد التأثيرات للشاشات الكبيرة
  */
 function setupDesktop(cards: HTMLElement[]): void {
-  const cardVisibleAmount = 120;
+  const cardVisibleAmount = 180;
   const initialOffset = 520;
   const timeline = gsap.timeline();
   
