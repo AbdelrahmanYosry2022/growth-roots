@@ -8,6 +8,7 @@ import { createProductsSolutions, initProductsSolutions } from '../../components
 import { createServices, initServices } from '../../components/services/services';
 import { createTestimonialsSection, initTestimonials } from '../../components/testimonials/testimonials';
 import { createContactSection, initContact } from '../../components/contact/contact';
+import { createVisualShowcase, initVisualShowcase } from '../../components/visualShowcase/visualShowcase';
 import { SECTION_CONFIG } from './sectionOrder';
 import { updateMainTsImports } from '../../utils/updateMainTs';
 
@@ -140,6 +141,11 @@ export async function mountHome(root: HTMLElement) {
   // إضافة مكون الـ services المعزول
   frag.appendChild(createServices());
   
+  // إضافة مكون الـ visualShowcase المعزول
+  const visualShowcaseDiv = document.createElement('div');
+  visualShowcaseDiv.className = 'visual-showcase';
+  frag.appendChild(visualShowcaseDiv);
+  
   // تحميل السكاشن ديناميكياً
   const { sections, initFunctions } = await loadSectionsDynamically();
   
@@ -173,6 +179,9 @@ export async function mountHome(root: HTMLElement) {
   
   // تهيئة مكون الـ services المعزول
   initServices();
+  
+  // تهيئة مكون الـ visualShowcase المعزول
+  initVisualShowcase();
   
   // تشغيل دوال تهيئة السكاشن
   initFunctions.forEach(initFn => {

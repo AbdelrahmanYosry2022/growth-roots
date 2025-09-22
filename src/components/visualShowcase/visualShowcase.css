@@ -1,0 +1,317 @@
+/* Visual Showcase Component Styles */
+@import url('https://unpkg.com/normalize.css') layer(normalize);
+
+@layer normalize, base, demo, grid, setup, scroll, novelty;
+
+@layer novelty {
+  @property --flip {
+    syntax: '<number>';
+    inherits: true;
+    initial-value: 0;
+  }
+  
+  @keyframes flip {
+    to {
+      --flip: 1;
+    }
+  }
+  
+  [data-enhanced='true'] {
+    @media (prefers-reduced-motion: no-preference) {
+      @supports (animation-timeline: scroll()) and (animation-range: 0 100%) {
+        .visual-showcase {
+          animation: flip both steps(1, end);
+          animation-timeline: scroll(root);
+        }
+      }
+    }
+  }
+  
+  :root {
+    --power-1-out: linear(
+      0 0%,
+      0.0027 3.64%,
+      0.0106 7.29%,
+      0.0425 14.58%,
+      0.0957 21.87%,
+      0.1701 29.16%,
+      0.2477 35.19%,
+      0.3401 41.23%,
+      0.5982 55.54%,
+      0.7044 61.58%,
+      0.7987 68.86%,
+      0.875 76.14%,
+      0.9297 83.43%,
+      0.9687 90.71%,
+      0.9922 94.07%,
+      1 100%
+    );
+    --power-2-out: linear(
+      0 0%,
+      0.0014 5.49%,
+      0.0071 10.99%,
+      0.0188 16.48%,
+      0.0373 21.97%,
+      0.0634 27.47%,
+      0.0978 32.96%,
+      0.141 38.45%,
+      0.1939 43.95%,
+      0.2565 49.44%,
+      0.4299 60.43%,
+      0.5181 65.92%,
+      0.6049 71.41%,
+      0.6903 76.91%,
+      0.7738 82.4%,
+      0.8551 87.89%,
+      0.9337 93.39%,
+      1 100%
+    );
+    --sine: linear(
+      0 0%,
+      0.2861 18.47%,
+      0.4829 32.08%,
+      0.6437 44.52%,
+      0.7712 56.07%,
+      0.8722 67.47%,
+      0.9115 73.02%,
+      0.9434 78.49%,
+      0.9682 83.91%,
+      0.9859 89.3%,
+      0.9965 94.66%,
+      1 100%
+    );
+  }
+  
+  @keyframes fade {
+    0%, 55% {
+      opacity: 0;
+    }
+  }
+  
+  @keyframes reveal {
+    0%, 30% {
+      scale: 0;
+    }
+  }
+  
+  @keyframes scale-x {
+    0%, 10% {
+      width: calc(90vw - (2 * var(--gutter)));
+    }
+  }
+  
+  @keyframes scale-y {
+    0%, 10% {
+      height: calc(90vh - (2 * var(--gutter)));
+    }
+  }
+}
+
+@layer setup {
+  .visual-showcase {
+    --gutter: 2rem;
+    --gap: 1rem;
+    position: relative;
+    min-height: 100vh;
+    width: 100vw;
+    display: flex;
+    place-items: center;
+    align-content: center;
+    overflow: clip;
+    background: light-dark(#fff, #000);
+  }
+  
+  .visual-showcase .content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    place-items: center;
+    align-content: center;
+    overflow: visible;
+  }
+  
+  .visual-showcase .scaler {
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .visual-showcase .scaler img,
+  .visual-showcase .scaler video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    object-fit: cover;
+    border-radius: 1rem;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+@layer grid {
+  .visual-showcase .grid {
+    --offset: 0;
+    width: 1600px;
+    max-width: calc(100% - (2 * var(--gutter)));
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(3, auto);
+    gap: var(--gap);
+    margin: 0 auto;
+    align-content: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+  }
+  
+  @media (max-width: 600px) {
+    .visual-showcase .grid {
+      grid-template-columns: repeat(3, 1fr);
+      --offset: -1;
+    }
+    
+    .visual-showcase .grid > div:nth-of-type(1) {
+      display: none;
+    }
+  }
+  
+  .visual-showcase .grid > .layer {
+    display: grid;
+    grid-column: 1 / -1;
+    grid-row: 1 / -1;
+    grid-template-columns: subgrid;
+    grid-template-rows: subgrid;
+  }
+  
+  .visual-showcase .grid > div:nth-of-type(1) div:nth-of-type(odd) {
+    grid-column: 1;
+  }
+  
+  .visual-showcase .grid > div:nth-of-type(1) div:nth-of-type(even) {
+    grid-column: -2;
+  }
+  
+  .visual-showcase .grid > div:nth-of-type(2) div:nth-of-type(odd) {
+    grid-column: calc(2 + var(--offset));
+  }
+  
+  .visual-showcase .grid > div:nth-of-type(2) div:nth-of-type(even) {
+    grid-column: calc(-3 - var(--offset));
+  }
+  
+  .visual-showcase .grid > div:nth-of-type(3) div {
+    grid-column: calc(3 + var(--offset));
+  }
+  
+  .visual-showcase .grid > div:nth-of-type(3) div:last-of-type {
+    grid-row: -1;
+  }
+  
+  .visual-showcase .grid .scaler {
+    position: relative;
+    grid-area: 2 / calc(3 + var(--offset));
+  }
+  
+  .visual-showcase .grid img {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 0.5rem;
+  }
+
+  /* Initial state for JS fallback ONLY when global enhancement not active */
+  html:not([data-enhanced]) .visual-showcase .layer > div { opacity:0; transform:scale(0); }
+  /* When enhancement active (CSS path) ensure items visible so per-layer CSS animations work */
+  html[data-enhanced] .visual-showcase .layer > div { opacity:1; transform:none; }
+  
+  .visual-showcase .grid video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1rem;
+    background: #000;
+  }
+}
+
+@layer base {
+  .visual-showcase {
+    font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif;
+  }
+  
+  .visual-showcase h1,
+  .visual-showcase h2,
+  .visual-showcase p {
+    font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif;
+  }
+  
+  .visual-showcase h1.fluid {
+    font-size: 72px;
+    line-height: 1.15;
+  }
+  
+  @media (max-width: 600px) {
+    .visual-showcase h1.fluid {
+      font-size: 34px;
+    }
+  }
+}
+
+@layer scroll {
+  @media (prefers-reduced-motion: no-preference) {
+    [data-enhanced='true'] .visual-showcase main section:first-of-type {
+      min-height: 240vh;
+    }
+    
+    @supports (animation-timeline: scroll()) and (animation-range: 0 100%) {
+      [data-enhanced='true'] .visual-showcase main section:first-of-type {
+        view-timeline: --runner;
+      }
+      
+      [data-enhanced='true'][data-center='true'] .visual-showcase .scaler img,
+      [data-enhanced='true'][data-center='true'] .visual-showcase .scaler video {
+        animation-name: scale-x, scale-y;
+        animation-fill-mode: both;
+        animation-timing-function: var(--power-2-out), var(--power-1-out);
+        animation-timeline: --runner, --runner;
+        animation-range: entry 100% exit -20%;
+      }
+      
+      [data-enhanced='true'][data-layers='true'] .visual-showcase .layer:nth-of-type(1) {
+        animation: fade both var(--sine), reveal both var(--power-1-out);
+        animation-timeline: --runner, --runner;
+        animation-range: entry 60% exit -40%, entry 60% exit -40%;
+      }
+      
+      [data-enhanced='true'][data-layers='true'] .visual-showcase .layer:nth-of-type(2) {
+        animation: fade both var(--sine), reveal both var(--power-2-out);
+        animation-timeline: --runner, --runner;
+        animation-range: entry 60% exit -40%, entry 60% exit -40%;
+      }
+      
+      [data-enhanced='true'][data-layers='true'] .visual-showcase .layer:nth-of-type(3) {
+        animation: fade both var(--sine), reveal both var(--power-4-out);
+        animation-timeline: --runner, --runner;
+        animation-range: entry 60% exit -40%, entry 60% exit -40%;
+      }
+    }
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .visual-showcase {
+    --gutter: 1rem;
+    --gap: 0.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .visual-showcase {
+    --gutter: 0.5rem;
+  }
+}

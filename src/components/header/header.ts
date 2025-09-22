@@ -11,6 +11,7 @@ export function createHeader(){
         <a href="#about">من نحن</a>
         <a href="#partners">شركاؤنا</a>
         <a href="#contact">تواصل معنا</a>
+        <a href="#" data-page="new-home">الصفحة الجديدة</a>
   <a href="/test-outsource-standalone/" data-external-page>الصفحة المستقلة</a>
       </nav>
       <a href="#consult" class="cta-link">اطلب استشارة</a>
@@ -22,6 +23,7 @@ export function createHeader(){
   <a href="#about">من نحن</a>
   <a href="#partners">شركاؤنا</a>
   <a href="#contact">تواصل معنا</a>
+  <a href="#" data-page="new-home">الصفحة الجديدة</a>
   <a href="/test-outsource-standalone/" data-external-page>الصفحة المستقلة</a>
     <a href="#consult" class="cta-link" style="font-size:20px;">اطلب استشارة</a>
   </div>
@@ -35,17 +37,64 @@ export function initHeader(){
   const mobileNav = document.querySelector('.mobile-nav');
   const dim = document.querySelector('.dim-overlay');
   let lastScroll = 0;
+  
   function updateActive(){
     const path = window.location.pathname;
-    const links = document.querySelectorAll('nav.desktop-nav a[data-external-page], .mobile-nav a[data-external-page]');
-    links.forEach(l=>{ if((l as HTMLAnchorElement).getAttribute('href') === '/test-outsource-standalone/'){ if(path.includes('test-outsource-standalone')) l.classList.add('active'); else l.classList.remove('active'); } });
+    const hash = window.location.hash.replace('#', '');
+    
+    // تحديث الروابط الخارجية
+    const externalLinks = document.querySelectorAll('nav.desktop-nav a[data-external-page], .mobile-nav a[data-external-page]');
+    externalLinks.forEach(l=>{
+      if((l as HTMLAnchorElement).getAttribute('href') === '/test-outsource-standalone/'){
+        if(path.includes('test-outsource-standalone')) l.classList.add('active'); 
+        else l.classList.remove('active');
+      }
+    });
+    
+    // تحديث الروابط الداخلية
+    const pageLinks = document.querySelectorAll('nav.desktop-nav a[data-page], .mobile-nav a[data-page]');
+    pageLinks.forEach(l => {
+      const pageName = (l as HTMLAnchorElement).dataset.page;
+      if (pageName === hash || (hash === '' && pageName === 'home')) {
+        l.classList.add('active');
+      } else {
+        l.classList.remove('active');
+      }
+    });
   }
-  const closeMenu = () => { burger && burger.classList.remove('active'); mobileNav && mobileNav.classList.remove('open'); dim && dim.classList.remove('active'); (document.body as any).style.overflow=''; };
-  burger && burger.addEventListener('click',()=>{ burger.classList.toggle('active'); mobileNav && mobileNav.classList.toggle('open'); dim && dim.classList.toggle('active'); const open = burger.classList.contains('active'); (document.body as any).style.overflow = open ? 'hidden' : ''; });
+  
+  const closeMenu = () => { 
+    burger && burger.classList.remove('active'); 
+    mobileNav && mobileNav.classList.remove('open'); 
+    dim && dim.classList.remove('active'); 
+    (document.body as any).style.overflow=''; 
+  };
+  
+  burger && burger.addEventListener('click',()=>{ 
+    burger.classList.toggle('active'); 
+    mobileNav && mobileNav.classList.toggle('open'); 
+    dim && dim.classList.toggle('active'); 
+    const open = burger.classList.contains('active'); 
+    (document.body as any).style.overflow = open ? 'hidden' : ''; 
+  });
+  
   dim && dim.addEventListener('click', closeMenu);
   mobileNav && mobileNav.querySelectorAll('a').forEach(a=> a.addEventListener('click', closeMenu));
+  
   window.addEventListener('popstate', updateActive);
+  window.addEventListener('hashchange', updateActive);
   updateActive();
+  
   window.addEventListener('keydown', e=>{ if(e.key==='Escape') closeMenu(); });
-  window.addEventListener('scroll',()=>{ const y = window.scrollY || document.documentElement.scrollTop; if(!header) return; if(y>40 && y>lastScroll){ header.classList.add('scrolled'); } else if(y<10){ header.classList.remove('scrolled'); } lastScroll = y; });
+  
+  window.addEventListener('scroll',()=>{ 
+    const y = window.scrollY || document.documentElement.scrollTop; 
+    if(!header) return; 
+    if(y>40 && y>lastScroll){ 
+      header.classList.add('scrolled'); 
+    } else if(y<10){ 
+      header.classList.remove('scrolled'); 
+    } 
+    lastScroll = y; 
+  });
 }
