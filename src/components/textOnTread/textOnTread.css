@@ -1,0 +1,196 @@
+/* Text on Tank Tread Animation Styles */
+
+.text-on-tread-section {
+  background: #0e202d;
+  padding: 4rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.text-on-tread-section .container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.text-on-tread-layout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 4rem;
+}
+
+.logo-container {
+  flex: 0 0 auto;
+}
+
+.growth-roots-logo {
+  width: 150px; /* smaller */
+  height: auto;
+  filter: none; /* restore original color */
+}
+
+.text-container {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start; /* move animated text more to the left */
+}
+
+/* Headline under logo */
+.logo-headline {
+  margin-top: 0.5rem;
+  font-size: clamp(28px, 4.5vw, 48px);
+  line-height: 1.05;
+  font-weight: 800;
+  color: #0b6b3b; /* original brand dark green */
+  text-align: left;
+}
+
+.logo-subline {
+  display: block;
+  font-size: clamp(18px, 2.2vw, 24px);
+  font-weight: 600;
+  color: rgba(11,107,59,0.85);
+}
+
+.tot {
+  position: relative;
+  width: 20em;
+  height: 20em;
+  margin: 2rem auto;
+}
+
+.tot__layer,
+.tot__tread {
+  position: absolute;
+.growth-roots-logo {
+  width: 120px; /* smaller */
+  height: auto;
+  filter: none; /* restore original color */
+}
+  color: transparent;
+  direction: ltr;
+  font-size: 3em;
+  font-weight: 900;
+  line-height: 1;
+  transform: translate(-50%, -50%) rotateX(45deg) rotateZ(45deg);
+  transform-style: preserve-3d;
+}
+
+.tot__tread {
+  animation-name: letter-tread-back;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  backface-visibility: hidden;
+  color: #135227;
+  overflow: hidden;
+  height: 100%;
+.logo-headline {
+  margin-top: 0.5rem;
+  font-size: clamp(28px, 4.5vw, 48px);
+  line-height: 1.05;
+  font-weight: 800;
+  color: #0b6b3b; /* original brand dark green */
+  text-align: right;
+  direction: rtl;
+}
+  transform: translate(-50%, -50%);
+  transition: color 0.3s;
+}
+
+.tot__tread-window::before {
+  content: attr(data-text);
+  display: block;
+  white-space: nowrap;
+  transform: rotateY(180deg);
+}
+
+.tot__layer:last-child .tot__tread {
+  animation-name: letter-tread-front;
+  color: #76b46a;
+}
+
+.tot__layer:last-child .tot__tread-window::before {
+  transform: rotateY(0);
+}
+
+/* Animations */
+/* treadHalf: 8rem, treadRadius: 2rem, treadCircle: 12.566rem, treadLength: 44.566rem */
+
+@keyframes letter-tread-back {
+  from {
+    transform: translate(-50%, -50%) translateX(0) rotateY(0) translateZ(-2rem);
+  }
+  17.95% { /* (8 / 44.566) * 100% */
+    transform: translate(-50%, -50%) translateX(8rem) rotateY(0) translateZ(-2rem);
+  }
+  32.09% { /* ((8 + 6.283) / 44.566) * 100% */
+    transform: translate(-50%, -50%) translateX(8rem) rotateY(-180deg) translateZ(-2rem);
+  }
+  50.14% { /* ((16 + 6.283) / 44.566) * 100% */
+    transform: translate(-50%, -50%) translateX(0) rotateY(-180deg) translateZ(-2rem);
+  }
+  68.19% { /* ((24 + 6.283) / 44.566) * 100% */
+    transform: translate(-50%, -50%) translateX(-8rem) rotateY(-180deg) translateZ(-2rem);
+  }
+  82.33% { /* ((24 + 12.566) / 44.566) * 100% */
+    transform: translate(-50%, -50%) translateX(-8rem) rotateY(-360deg) translateZ(-2rem);
+  }
+  to {
+    transform: translate(-50%, -50%) translateX(0) rotateY(-360deg) translateZ(-2rem);
+  }
+}
+
+@keyframes letter-tread-front {
+  from {
+    transform: translate(-50%, -50%) translateX(0) rotateY(0) translateZ(2rem);
+  }
+  17.95% { /* (8 / 44.566) * 100% */
+    transform: translate(-50%, -50%) translateX(-8rem) rotateY(0) translateZ(2rem);
+  }
+  32.09% { /* ((8 + 6.283) / 44.566) * 100% */
+    transform: translate(-50%, -50%) translateX(-8rem) rotateY(-180deg) translateZ(2rem);
+  }
+  50.14% { /* ((16 + 6.283) / 44.566) * 100% */
+    transform: translate(-50%, -50%) translateX(0) rotateY(-180deg) translateZ(2rem);
+  }
+  68.19% { /* ((24 + 6.283) / 44.566) * 100% */
+    transform: translate(-50%, -50%) translateX(8rem) rotateY(-180deg) translateZ(2rem);
+  }
+  82.33% { /* ((24 + 12.566) / 44.566) * 100% */
+    transform: translate(-50%, -50%) translateX(8rem) rotateY(-360deg) translateZ(2rem);
+  }
+  to {
+    transform: translate(-50%, -50%) translateX(0) rotateY(-360deg) translateZ(2rem);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .tot {
+    width: 15em;
+    height: 15em;
+  }
+  
+  .tot__layer {
+    font-size: 2em;
+  }
+}
+
+@media (max-width: 480px) {
+  .tot {
+    width: 12em;
+    height: 12em;
+  }
+  
+  .tot__layer {
+    font-size: 1.5em;
+  }
+}

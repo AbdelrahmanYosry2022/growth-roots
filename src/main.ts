@@ -4,6 +4,7 @@ import './components/visualShowcase/visualShowcase.css';
 
 import { mountHome } from './pages/home/home';
 import { mountNewHome } from './pages/new-home/newHome';
+import { mountServices } from './pages/services/services';
 
 const root = document.getElementById('app') || (() => { const d=document.createElement('div'); d.id='app'; document.body.appendChild(d); return d; })();
 
@@ -16,6 +17,9 @@ async function loadPage(pageName: string = 'home') {
     switch (pageName) {
       case 'new-home':
         await mountNewHome(root as HTMLElement);
+        break;
+      case 'services':
+        await mountServices(root as HTMLElement);
         break;
       case 'home':
       default:
@@ -47,4 +51,7 @@ window.addEventListener('popstate', (e) => {
 
 // تحميل الصفحة الأولى
 const initialPage = window.location.hash.replace('#', '') || 'home';
-loadPage(initialPage);
+loadPage(initialPage).then(() => {
+  // إزالة علامة التحميل بعد تحميل الصفحة
+  document.body.classList.remove('loading');
+});

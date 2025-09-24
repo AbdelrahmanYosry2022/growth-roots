@@ -11,6 +11,7 @@ export function createHeader(){
       <div class="logo"><img src="/logo/Asset%202.svg" alt="جروث روتس" loading="lazy"></div>
       <nav class="desktop-nav" aria-label="التنقل الرئيسي">
         <a class="active" href="#solutions">حلولنا</a>
+        <a href="#" data-page="services">الخدمات</a>
         <a href="#about">من نحن</a>
         <a href="#partners">شركاؤنا</a>
         <a href="#contact">تواصل معنا</a>
@@ -23,6 +24,7 @@ export function createHeader(){
   </header>
   <div class="mobile-nav" role="dialog" aria-modal="true" aria-label="القائمة الرئيسية">
   <a class="active" href="#solutions">حلولنا</a>
+  <a href="#" data-page="services">الخدمات</a>
   <a href="#about">من نحن</a>
   <a href="#partners">شركاؤنا</a>
   <a href="#contact">تواصل معنا</a>

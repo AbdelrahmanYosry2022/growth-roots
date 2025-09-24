@@ -1,0 +1,292 @@
+/* Standalone showcase CSS - copied from new-home/standaloneShowcase.css */
+.standalone-showcase {
+  font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif !important;
+  background: #0e1f2d !important;
+  color: #fff !important;
+}
+
+.standalone-showcase * {
+  font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif !important;
+}
+
+.standalone-showcase .content-wrap {
+  background: #0e1f2d !important;
+}
+
+/* Text Section Styles */
+.text-section {
+  background: #0e1f2d !important;
+  color: #fff !important;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  padding: 80px 24rem;
+  font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif !important;
+}
+
+.text-content {
+  max-width: 1200px;
+  text-align: right;
+  direction: rtl;
+}
+
+.logo-container {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: flex-first;
+}
+
+.section-logo {
+  width: 80px;
+  height: auto;
+  
+}
+
+.text-content .main-title {
+  font-size: 72px;
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0 0 2rem 0;
+  font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif !important;
+}
+
+.text-content .subtitle {
+  font-size: 1.25rem;
+  line-height: 1.7;
+  margin: 0;
+  opacity: 0.9;
+  max-width: 800px;
+  font-family: 'Cairo', 'Cairo Variable', system-ui, sans-serif !important;
+  font-weight: 400;
+}
+
+/* Responsive adjustments for text section */
+@media (max-width: 768px) {
+  .text-section {
+    padding: 60px 1rem;
+    min-height: 80vh;
+  }
+  
+  .section-logo {
+    width: 100px;
+  }
+  
+  .text-content .main-title {
+    font-size: 48px;
+  }
+  
+  .text-content .subtitle {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section-logo {
+    width: 80px;
+  }
+  
+  .text-content .main-title {
+    font-size: 36px;
+  }
+  
+  .text-content .subtitle {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+}
+
+/* Variables and keyframes */
+.standalone-showcase {
+  --power-1-out: linear(
+    0 0%,
+    0.0027 3.64%,
+    0.0106 7.29%,
+    0.0425 14.58%,
+    0.0957 21.87%,
+    0.1701 29.16%,
+    0.2477 35.19%,
+    0.3401 41.23%,
+    0.5982 55.18%,
+    0.7044 61.56%,
+    0.7987 68.28%,
+    0.875 75%,
+    0.9297 81.25%,
+    0.9687 87.5%,
+    0.9922 93.75%,
+    1 100%
+  );
+  --power-2-out: linear(
+    0 0%,
+    0.0036 9.62%,
+    0.0185 16.66%,
+    0.0489 23.03%,
+    0.0962 28.86%,
+    0.1705 34.93%,
+    0.269 40.66%,
+    0.3867 45.89%,
+    0.5833 52.95%,
+    0.683 57.05%,
+    0.7829 62.14%,
+    0.8621 67.46%,
+    0.8991 70.68%,
+    0.9299 74.03%,
+    0.9545 77.52%,
+    0.9735 81.21%,
+    0.9865 85%,
+    0.9949 89.15%,
+    1 100%
+  );
+  --power-3-out: linear(
+    0 0%,
+    0.0029 13.8%,
+    0.0184 21.9%,
+    0.0339 25.51%,
+    0.0551 28.81%,
+    0.0827 31.88%,
+    0.1168 34.76%,
+    0.1962 39.57%,
+    0.3005 44.02%,
+    0.4084 47.53%,
+    0.6242 53.45%,
+    0.7493 57.93%,
+    0.8495 62.97%,
+    0.8888 65.67%,
+    0.9213 68.51%,
+    0.9629 73.9%,
+    0.9876 80.16%,
+    0.998 87.5%,
+    1 100%
+  );
+  --power-4-out: linear(
+    0 0%,
+    0.0012 14.95%,
+    0.0089 22.36%,
+    0.0297 28.43%,
+    0.0668 33.43%,
+    0.0979 36.08%,
+    0.1363 38.55%,
+    0.2373 43.07%,
+    0.3675 47.01%,
+    0.5984 52.15%,
+    0.7121 55.23%,
+    0.8192 59.21%,
+    0.898 63.62%,
+    0.9297 66.23%,
+    0.9546 69.06%,
+    0.9733 72.17%,
+    0.9864 75.67%,
+    0.9982 83.73%,
+    1 100%
+  );
+  --sine: linear(
+    0 0%,
+    0.2861 18.47%,
+    0.4829 32.08%,
+    0.6437 44.52%,
+    0.7712 56.07%,
+    0.8722 67.47%,
+    0.9115 73.02%,
+    0.9434 78.49%,
+    0.9682 83.91%,
+    0.9859 89.3%,
+    0.9965 94.66%,
+    1 100%
+  );
+}
+
+@keyframes standalone-fade {
+  0%, 55% {
+    opacity: 0;
+  }
+}
+
+@keyframes standalone-reveal {
+  0%, 30% {
+    scale: 0;
+  }
+}
+
+@keyframes standalone-scale-x {
+  0%, 10% {
+    width: calc(90vw - (2 * 2rem));
+  }
+}
+
+@keyframes standalone-scale-y {
+  0%, 10% {
+    height: calc(90vh - (2 * 2rem));
+  }
+}
+
+/* Scroll animations for enhanced mode */
+@media (prefers-reduced-motion: no-preference) {
+  [data-enhanced='true'] .standalone-showcase main section:first-of-type {
+    min-height: 240vh;
+  }
+
+  @supports (animation-timeline: scroll()) and (animation-range: 0 100%) {
+    [data-enhanced='true'] .standalone-showcase main section:first-of-type {
+      view-timeline: --standalone-runner;
+    }
+
+    [data-enhanced='true'][data-center='true'] .standalone-showcase .scaler img,
+    [data-enhanced='true'][data-center='true'] .standalone-showcase .scaler video {
+      animation-name: standalone-scale-x, standalone-scale-y;
+      animation-fill-mode: both;
+      animation-timing-function: var(--power-2-out), var(--power-1-out);
+      animation-timeline: --standalone-runner, --standalone-runner;
+      animation-range: entry 100% exit -20%;
+    }
+
+    [data-enhanced='true'][data-layers='true'] .standalone-showcase .grid .layer {
+      animation-name: standalone-fade, standalone-reveal;
+      animation-fill-mode: both;
+      animation-timeline: --standalone-runner, --standalone-runner;
+      animation-timing-function: var(--sine), var(--power-1-out);
+      animation-range: entry 100% exit 0%;
+    }
+    
+    [data-enhanced='true'][data-layers='true'][data-stagger='range'] .standalone-showcase .grid .layer:nth-of-type(1) {
+      animation-range: entry 100% exit 0%;
+    }
+    
+    [data-enhanced='true'][data-layers='true'][data-stagger='range'] .standalone-showcase .grid .layer:nth-of-type(2) {
+      animation-range: entry 100% exit -10%;
+    }
+    
+    [data-enhanced='true'][data-layers='true'][data-stagger='range'] .standalone-showcase .grid .layer:nth-of-type(3) {
+      animation-range: entry 100% exit -20%;
+    }
+  }
+}
+
+/* Grid responsive adjustments */
+@media (max-width: 600px) {
+  .standalone-showcase .grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+    --offset: -1;
+  }
+
+  .standalone-showcase .grid > div:nth-of-type(1) {
+    display: none;
+  }
+}
+
+/* Typography adjustments */
+.standalone-showcase h1.fluid {
+  font-size: 72px !important;
+  line-height: 1.15 !important;
+  --font-level: 8;
+  line-height: 0.6;
+}
+
+.standalone-showcase h2.fluid {
+  --font-level: 4;
+}
+
+@media (max-width: 600px) {
+  .standalone-showcase h1.fluid {
+    font-size: 34px !important;
+  }
+}

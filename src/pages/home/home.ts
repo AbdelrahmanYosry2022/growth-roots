@@ -1,200 +1,243 @@
-// استيراد المكونات والوظائف
+// صفحة home (مستنسخة من new-home): تجمع بين الهيدر الأصلي + نسخة مستقلة من visual showcase بدون تعديل على الأنماط
 import { createHeader, initHeader } from '../../components/header/header';
 import { createHero } from '../../components/hero/hero';
 import { initHeroSlider } from '../../components/hero/sliderInit';
 import { createFooter, initFooter } from '../../components/footer/footer';
 import { createStacked, initStacked } from '../../components/stacked/stacked';
-import { createProductsSolutions, initProductsSolutions } from '../../components/productsSolutions/productsSolutions';
-import { createServices, initServices } from '../../components/services/services';
-import { createTestimonialsSection, initTestimonials } from '../../components/testimonials/testimonials';
-import { createContactSection, initContact } from '../../components/contact/contact';
-import { createVisualShowcase, initVisualShowcase } from '../../components/visualShowcase/visualShowcase';
-import { SECTION_CONFIG } from './sectionOrder';
-import { updateMainTsImports } from '../../utils/updateMainTs';
+import './standaloneShowcase.css';
 
-// Function to get available section folders dynamically using import.meta.glob
-async function getAvailableSections(): Promise<string[]> {
-  // Use import.meta.glob to discover all section directories
-  const sectionModules = import.meta.glob('./*/*.ts', { eager: false });
-  
-  // Define sections that should be excluded
-  const excludedItems = ['home.ts', 'downArrow.css', 'verticalNavigation.ts', 'testOutsource', 'sectionOrder.ts'];
-  
-  const availableSections: string[] = [];
-  
-  // Extract folder names from the glob results
-  for (const modulePath of Object.keys(sectionModules)) {
-    // Extract folder name from path like "./1-productsSolutions/productsSolutionsSection.ts"
-    const pathParts = modulePath.split('/');
-    if (pathParts.length >= 3) {
-      const folderName = pathParts[1]; // Get the folder name
-      const fileName = pathParts[2]; // Get the file name
-      
-      // Skip excluded items and ensure it's a section file
-      if (!excludedItems.includes(fileName) && 
-          fileName.endsWith('Section.ts') && 
-          !availableSections.includes(folderName)) {
-        availableSections.push(folderName);
-      }
-    }
+// إدراج GSAP ديناميكيًا لنسخة من النمط المستقل
+let gsap: any;
+let ScrollTrigger: any;
+
+async function loadGSAP() {
+  if (!gsap) {
+    const gsapModule = await import('gsap');
+    const scrollTriggerModule = await import('gsap/ScrollTrigger');
+    gsap = gsapModule.gsap;
+    ScrollTrigger = scrollTriggerModule.ScrollTrigger;
+    gsap.registerPlugin(ScrollTrigger);
   }
-  
-  // Sort sections by number prefix, then alphabetically
-  availableSections.sort((a, b) => {
-    // Extract the number prefix if it exists
-    const getOrderNumber = (name: string): number => {
-      const match = name.match(/^(\d+)-/);
-      return match ? parseInt(match[1]) : 999; // Non-numbered items go to the end
-    };
-    
-    const orderA = getOrderNumber(a);
-    const orderB = getOrderNumber(b);
-    
-    // If both have numbers, sort by number
-    if (orderA !== 999 && orderB !== 999) {
-      return orderA - orderB;
-    }
-    
-    // If only one has a number, numbered comes first
-    if (orderA !== 999) return -1;
-    if (orderB !== 999) return 1;
-    
-    // If neither has a number, sort alphabetically
-    return a.localeCompare(b);
-  });
-  
-  console.log('Available sections discovered dynamically:', availableSections);
-  return availableSections;
 }
 
-/**
- * دالة لتحميل السكاشن ديناميكياً من المجلدات
- */
-async function loadSectionsDynamically() {
-  const sections: (() => HTMLElement)[] = [];
-  const initFunctions: (() => void)[] = [];
-  const availableSections = await getAvailableSections();
+// تحقق من دعم scroll animations
+const hasScrollSupport = CSS.supports(
+  '(animation-timeline: view()) and (animation-range: 0 100%)'
+);
+
+// دالة لإنشاء القسم النصي الجديد
+function createTextSection() {
+  const section = document.createElement('section');
+  section.className = 'text-section';
   
-  // Update CSS imports in main.ts based on discovered sections
-  updateMainTsImports(availableSections);
-  
-  for (const sectionName of availableSections) {
-    // Clean section name for config lookup (remove number prefix if exists)
-    const cleanSectionName = sectionName.replace(/^\d+-/, '');
-    const config = SECTION_CONFIG[cleanSectionName];
-    
-    // تخطي السكاشن المعطلة
-    if (config && !config.enabled) {
-      console.warn(`Section ${cleanSectionName} is disabled`);
-      continue;
-    }
-    
-    try {
-      // تحميل الموديول ديناميكياً
-      const module = await import(`./${sectionName}/${cleanSectionName}Section`);
-      
-      // البحث عن دالة الإنشاء
-      const createFunctionName = `create${cleanSectionName.charAt(0).toUpperCase() + cleanSectionName.slice(1)}Section`;
-      const createFunction = module[createFunctionName];
-      
-      if (createFunction && typeof createFunction === 'function') {
-        sections.push(createFunction);
-        
-        // البحث عن دالة التهيئة إذا كانت موجودة
-        if (config && config.hasInit) {
-          const initFunctionNames = [
-            `init${cleanSectionName.charAt(0).toUpperCase() + cleanSectionName.slice(1)}`,
-            `init${cleanSectionName.charAt(0).toUpperCase() + cleanSectionName.slice(1)}Section`,
-            `init${cleanSectionName.charAt(0).toUpperCase() + cleanSectionName.slice(1)}Rotation`,
-            `init${cleanSectionName.charAt(0).toUpperCase() + cleanSectionName.slice(1)}Form`
-          ];
-          
-          for (const initName of initFunctionNames) {
-            const initFunction = module[initName];
-            if (initFunction && typeof initFunction === 'function') {
-              initFunctions.push(initFunction);
-              break;
-            }
-          }
-        }
-      } else {
-        console.warn(`Create function not found for section: ${cleanSectionName}`);
-      }
-    } catch (error) {
-      console.warn(`Could not load section: ${sectionName}`, error);
-    }
-  }
-  
-  return { sections, initFunctions };
+  section.innerHTML = `
+    <div class="text-content">
+      <div class="logo-container">
+        <img src="/logo/Asset%202.svg" alt="جروث روتس" class="section-logo" />
+      </div>
+      <h1 class="main-title">نحوّل رؤيتك<br/>إلى مصنع ناجح</h1>
+      <p class="subtitle">
+        جروث روتس تقدم حلولاً متكاملة لتأسيس وتشغيل وتطوير مصانع اللحوم والدواجن والمنتجات البروتينية: من دراسات الجدوى والتصميم والتجهيز بالمعدات، مروراً بإدارة العمليات والتدريب وتطوير المنتجات، وحتى توريد الخامات وإعادة هيكلة المصانع المتعثرة. شريك موثوق في كل مرحلة.
+      </p>
+    </div>
+  `;
+
+  return section;
 }
 
-/**
- * دالة تحميل الصفحة الرئيسية مع السكاشن الديناميكية
- */
+// دالة لإنشاء القسم المستقل تماما كما في test-outsource-standalone
+function createStandaloneShowcase() {
+  const section = document.createElement('div');
+  section.className = 'standalone-showcase';
+  
+  // إدراج HTML كما هو في index.html المستقل
+  section.innerHTML = `
+    <div class="content-wrap" style="overflow: clip; background: light-dark(#fff, #000); z-index: 2;">
+      <main style="margin-top: 0;">
+        <section>
+          <div class="content" style="min-height: 100vh; width: 100vw; display: flex; place-items: center; align-content: center; position: sticky; top: 0; overflow: visible;">
+            <div class="grid" style="--offset: 0; width: 1600px; max-width: calc(100% - (2 * 2rem)); display: grid; grid-template-columns: repeat(5, 1fr); grid-template-rows: repeat(3, auto); gap: clamp(10px, 7.35vw, 80px); margin: 0 auto; align-content: center; position: absolute; top: 50%; left: 50%; translate: -50% -50%;">
+              <div class="layer" style="display: grid; grid-column: 1 / -1; grid-row: 1 / -1; grid-template-columns: subgrid; grid-template-rows: subgrid;">
+                <div style="grid-column: 1;"><img src="/licensed-image.jpeg" alt="معدات إنتاج حديثة" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem;"/></div>
+                <div style="grid-column: -2;"><img src="/licensed-image (1).jpeg" alt="خط إنتاج غذائي" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem;"/></div>
+                <div style="grid-column: 1;"><img src="/licensed-image (2).jpeg" alt="تجهيزات مصنع بروتيني" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem;"/></div>
+                <div style="grid-column: -2;"><img src="/unnamed (1).png" alt="دعم وتشغيل" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem;"/></div>
+                <div style="grid-column: 1;"><img src="/logo/Asset%201.svg" alt="شعار جروث روتس" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem; background:#fff; padding:8px; object-fit:contain;"/></div>
+                <div style="grid-column: -2;"><img src="/logo/Asset%202.svg" alt="هوية الشركة" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem; background:#fff; padding:8px; object-fit:contain;"/></div>
+              </div>
+              <div class="layer" style="display: grid; grid-column: 1 / -1; grid-row: 1 / -1; grid-template-columns: subgrid; grid-template-rows: subgrid;">
+                <div style="grid-column: calc(2 + var(--offset));"><img src="/licensed-image (1).jpeg" alt="تطوير المنتجات" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem;"/></div>
+                <div style="grid-column: calc(-3 - var(--offset));"><img src="/licensed-image (2).jpeg" alt="ضبط الجودة" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem;"/></div>
+                <div style="grid-column: calc(2 + var(--offset));"><img src="/licensed-image.jpeg" alt="تحسين الكفاءة" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem;"/></div>
+                <div style="grid-column: calc(-3 - var(--offset));"><img src="/unnamed (1).png" alt="استشارات فنية" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem;"/></div>
+                <div style="grid-column: calc(2 + var(--offset));"><img src="/logo/Asset%202.svg" alt="هوية مرئية" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem; background:#fff; padding:8px; object-fit:contain;"/></div>
+                <div style="grid-column: calc(-3 - var(--offset));"><img src="/logo/Asset%201.svg" alt="شريك صناعة الغذاء" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem; background:#fff; padding:8px; object-fit:contain;"/></div>
+              </div>
+              <div class="layer" style="display: grid; grid-column: 1 / -1; grid-row: 1 / -1; grid-template-columns: subgrid; grid-template-rows: subgrid;">
+                <div style="grid-column: calc(3 + var(--offset));"><img src="/licensed-image (2).jpeg" alt="حلول متكاملة" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem;"/></div>
+                <div style="grid-column: calc(3 + var(--offset)); grid-row: -1;"><img src="/licensed-image (1).jpeg" alt="دعم تشغيلي" loading="lazy" style="width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 1rem;"/></div>
+              </div>
+              
+              <div class="scaler" style="position: relative; grid-area: 2 / calc(3 + var(--offset)); z-index: 2; width: 100%; height: 100%;">
+                <video src="/videos/EMSTEEL.mp4" autoplay muted loop playsinline preload="metadata" aria-label="عرض تشغيلي لمصنع" style="position: absolute; top: 50%; left: 50%; translate: -50% -50%; object-fit: cover; border-radius: 1rem; width: 100%; height: 100%; background: #000;">
+                  متصفحك لا يدعم تشغيل الفيديو.
+                </video>
+              </div>
+
+            </div>
+          </div>
+        </section>
+        <section style="display:grid; place-items:center; min-height:auto; padding:320px 80px;">
+          <h2 class="fluid" style="margin:0; font-size: 72px; line-height: 1.15;">شريكك الصناعي الشامل</h2>
+        </section>
+      </main>
+    </div>
+  `;
+
+  return section;
+}
+
+// دالة لتهيئة الرسوم المتحركة (نسخة من script.js)
+async function initStandaloneAnimations() {
+  const config = { 
+    theme: 'system', 
+    enhanced: true, 
+    stick: true, 
+    layers: true, 
+    center: true, 
+    stagger: 'range' 
+  };
+
+  // تعيين data attributes
+  document.documentElement.dataset.theme = config.theme;
+  document.documentElement.dataset.enhanced = config.enhanced.toString();
+  document.documentElement.dataset.stick = config.stick.toString();
+  document.documentElement.dataset.center = config.center.toString();
+  document.documentElement.dataset.layers = config.layers.toString();
+  document.documentElement.dataset.stagger = config.stagger;
+
+  if (config.enhanced && !hasScrollSupport) {
+    await loadGSAP();
+    
+    let scalerTl = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: '.standalone-showcase main section:first-of-type',
+          start: 'top -10%',
+          end: 'bottom 80%',
+          scrub: true,
+        },
+      })
+      .from(
+        '.standalone-showcase .scaler img, .standalone-showcase .scaler video',
+        {
+          height: (window.innerHeight * 0.6) - 32,
+          ease: 'power1.inOut',
+        },
+        0
+      )
+      .from(
+        '.standalone-showcase .scaler img, .standalone-showcase .scaler video',
+        {
+          width: (window.innerWidth * 0.6) - 32,
+          ease: 'power2.inOut',
+        },
+        0
+      );
+
+    // الطبقات
+    let layersTl = gsap
+      .timeline({
+        scrollTrigger: {
+          trigger: '.standalone-showcase main section:first-of-type',
+          start: 'top -40%',
+          end: 'bottom bottom',
+          scrub: true,
+        },
+      })
+      .from(
+        '.standalone-showcase .layer:nth-of-type(1)',
+        {
+          opacity: 0,
+          ease: 'sine.out',
+        },
+        0
+      )
+      .from(
+        '.standalone-showcase .layer:nth-of-type(1)',
+        {
+          scale: 0,
+          ease: 'power1.inOut',
+        },
+        0
+      )
+      .from(
+        '.standalone-showcase .layer:nth-of-type(2)',
+        {
+          opacity: 0,
+          ease: 'sine.out',
+        },
+        0
+      )
+      .from(
+        '.standalone-showcase .layer:nth-of-type(2)',
+        {
+          scale: 0,
+          ease: 'power3.inOut',
+        },
+        0
+      )
+      .from(
+        '.standalone-showcase .layer:nth-of-type(3)',
+        {
+          opacity: 0,
+          ease: 'sine.out',
+        },
+        0
+      )
+      .from(
+        '.standalone-showcase .layer:nth-of-type(3)',
+        {
+          scale: 0,
+          ease: 'power4.inOut',
+        },
+        0
+      );
+  }
+}
+
 export async function mountHome(root: HTMLElement) {
   const frag = document.createDocumentFragment();
-  
-  // إضافة الهيدر والهيرو (ثابتين)
+
+  // الهيدر + الهيرو كما في الصفحة الأصلية
   frag.appendChild(createHeader());
   frag.appendChild(createHero());
-  
-  // إضافة مكون الـ services المعزول
-  frag.appendChild(createServices());
-  
-  // إضافة مكون الـ visualShowcase المعزول
-  const visualShowcaseDiv = document.createElement('div');
-  visualShowcaseDiv.className = 'visual-showcase';
-  frag.appendChild(visualShowcaseDiv);
-  
-  // تحميل السكاشن ديناميكياً
-  const { sections, initFunctions } = await loadSectionsDynamically();
-  
-  // إضافة كل سكشن للصفحة
-  sections.forEach(createSection => {
-    try {
-      const sectionElement = createSection();
-      if (sectionElement) {
-        frag.appendChild(sectionElement);
-      }
-    } catch (error) {
-      console.error('Error creating section:', error);
-    }
-  });
-  
-  // إضافة مكون الـ productsSolutions المعزول
-  frag.appendChild(createProductsSolutions());
-  
-  // إضافة مكون الـ stacked المعزول
+
+  // القسم النصي الجديد
+  frag.appendChild(createTextSection());
+
+  // القسم المستقل من test-outsource-standalone
+  frag.appendChild(createStandaloneShowcase());
+
+  // إضافة مكون stacked
   frag.appendChild(createStacked());
-  
-  // إضافة الـ footer
+
+  // فوتر قياسي
   frag.appendChild(createFooter());
-  
+
   root.appendChild(frag);
-  
-  // تشغيل دوال التهيئة
+
+  // تهيئة الوظائف كما في الصفحة الرئيسية الأصلية
   initHeader();
   initHeroSlider();
   initFooter();
-  
-  // تهيئة مكون الـ services المعزول
-  initServices();
-  
-  // تهيئة مكون الـ visualShowcase المعزول
-  initVisualShowcase();
-  
-  // تشغيل دوال تهيئة السكاشن
-  initFunctions.forEach(initFn => {
-    try {
-      initFn();
-    } catch (error) {
-      console.error('Error initializing section:', error);
-    }
-  });
-  
-  // تهيئة مكون الـ productsSolutions المعزول
-  initProductsSolutions();
-  
-  // تهيئة مكون الـ stacked المعزول
+
+  // تهيئة مكون stacked
   initStacked();
+
+  // تهيئة الرسوم المتحركة للقسم المستقل
+  await initStandaloneAnimations();
 }
+
+export default { mountHome };
+

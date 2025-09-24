@@ -54,7 +54,9 @@ export function createHero(){
     
     // إضافة أزرار التنقل العمودي
     const verticalNav = createVerticalNavigation();
-    container.appendChild(verticalNav);
+    if (verticalNav) {
+      container.appendChild(verticalNav);
+    }
     
     // تهيئة التنقل العمودي
     initVerticalNavigation();
