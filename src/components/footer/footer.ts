@@ -19,8 +19,8 @@ export function createFooter(): HTMLElement {
     <div class="footer-grid">
       <div class="footer-col">
         <h5>الشركة</h5>
-        <a href="#about">من نحن</a>
-        <a href="#solutions">الخدمات</a>
+        <a href="#" data-page="about">من نحن</a>
+        <a href="#" data-page="services">الخدمات</a>
         <a href="#products">المنتجات</a>
         <a href="#contact">تواصل</a>
       </div>

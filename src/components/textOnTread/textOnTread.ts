@@ -26,8 +26,6 @@ function createTextOnTreadFragment(text: string, delay: number, duration: number
   return fragment;
 }
 
-
-
 function createTextOnTreadLayer(text: string, layerFragments: HTMLElement[], ariaHidden: boolean = false): HTMLElement {
   const layer = document.createElement('div');
   layer.className = 'tot__layer';
@@ -113,54 +111,3 @@ export function initTextOnTread(): void {
 
 export { createTextOnTread };
 export default { mountTextOnTread, initTextOnTread };
-
-// Create the full section markup (logo + headline + animation container)
-export function createTextOnTreadSection(options?: { containerId?: string; logoSrc?: string; headline?: string; subline?: string; text?: string }) {
-  const container = document.createElement('section');
-  container.className = 'text-on-tread-section';
-
-  const inner = document.createElement('div');
-  inner.className = 'container';
-
-  const layout = document.createElement('div');
-  layout.className = 'text-on-tread-layout';
-
-  // logo column
-  const logoCol = document.createElement('div');
-  logoCol.className = 'logo-container';
-  const img = document.createElement('img');
-  img.className = 'growth-roots-logo';
-  img.src = options?.logoSrc || '/logo/Asset 2.svg';
-  img.alt = 'Growth Roots';
-  logoCol.appendChild(img);
-
-  if (options?.headline) {
-    const h = document.createElement('div');
-    h.className = 'logo-headline';
-    h.innerHTML = options.headline.split('\n').map(s => `<span>${s}</span>`).join('<br/>');
-    if (options?.subline) {
-      const sub = document.createElement('span');
-      sub.className = 'logo-subline';
-      sub.textContent = options.subline;
-      h.appendChild(sub);
-    }
-    logoCol.appendChild(h);
-  }
-
-  // text animation column
-  const textCol = document.createElement('div');
-  textCol.className = 'text-container';
-  const animWrapper = document.createElement('div');
-  animWrapper.id = options?.containerId || 'textOnTread';
-  textCol.appendChild(animWrapper);
-
-  layout.appendChild(logoCol);
-  layout.appendChild(textCol);
-  inner.appendChild(layout);
-  container.appendChild(inner);
-
-  // initialize animation inside the wrapper
-  createTextOnTread(animWrapper, { text: options?.text || 'RESILIENCE' });
-
-  return container;
-}

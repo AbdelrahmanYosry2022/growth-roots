@@ -5,6 +5,7 @@ import './components/visualShowcase/visualShowcase.css';
 import { mountHome } from './pages/home/home';
 import { mountNewHome } from './pages/new-home/newHome';
 import { mountServices } from './pages/services/services';
+import { mountAbout } from './pages/about/about';
 
 const root = document.getElementById('app') || (() => { const d=document.createElement('div'); d.id='app'; document.body.appendChild(d); return d; })();
 
@@ -20,6 +21,9 @@ async function loadPage(pageName: string = 'home') {
         break;
       case 'services':
         await mountServices(root as HTMLElement);
+        break;
+      case 'about':
+        await mountAbout(root as HTMLElement);
         break;
       case 'home':
       default:
@@ -37,9 +41,12 @@ document.addEventListener('click', (e) => {
   if (target.dataset?.page) {
     e.preventDefault();
     const pageName = target.dataset.page;
-    loadPage(pageName);
-    // تحديث URL بدون إعادة تحميل الصفحة
+    // تحديث URL أولاً لضمان قراءة الهيدر للقيمة الصحيحة من الهاش
     history.pushState({ page: pageName }, '', `#${pageName}`);
+    // إعلام الهيدر فورًا لتحديث حالة الروابط
+    window.dispatchEvent(new HashChangeEvent('hashchange'));
+    // ثم تحميل الصفحة المطلوبة
+    loadPage(pageName);
   }
 });
 

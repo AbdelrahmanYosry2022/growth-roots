@@ -12,7 +12,7 @@ export function createHeader(){
       <nav class="desktop-nav" aria-label="التنقل الرئيسي">
         <a class="active" href="#solutions">حلولنا</a>
         <a href="#" data-page="services">الخدمات</a>
-        <a href="#about">من نحن</a>
+        <a href="#" data-page="about">من نحن</a>
         <a href="#partners">شركاؤنا</a>
         <a href="#contact">تواصل معنا</a>
         <a href="#" data-page="new-home">الصفحة الجديدة</a>
@@ -25,7 +25,7 @@ export function createHeader(){
   <div class="mobile-nav" role="dialog" aria-modal="true" aria-label="القائمة الرئيسية">
   <a class="active" href="#solutions">حلولنا</a>
   <a href="#" data-page="services">الخدمات</a>
-  <a href="#about">من نحن</a>
+  <a href="#" data-page="about">من نحن</a>
   <a href="#partners">شركاؤنا</a>
   <a href="#contact">تواصل معنا</a>
   <a href="#" data-page="new-home">الصفحة الجديدة</a>

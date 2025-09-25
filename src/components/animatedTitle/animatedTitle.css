@@ -1,0 +1,36 @@
+.animated-title {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  min-height: 35px;
+}
+
+.animated-word {
+  display: inline-block;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-origin: center;
+  white-space: nowrap;
+  will-change: transform, opacity, filter;
+}
+
+.animated-title .animated-word {
+  position: relative;
+  z-index: 10;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .animated-word {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .animated-word {
+    font-size: 20px;
+  }
+}
