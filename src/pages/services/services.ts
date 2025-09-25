@@ -3,10 +3,12 @@ import { createHeader, initHeader } from '../../components/header/header';
 import { createFooter, initFooter } from '../../components/footer/footer';
 import { createServicesGrid, initServicesGrid } from '../../components/servicesGrid/servicesGrid';
 import { createHeroSection, initHeroSection } from '../../components/heroSection/heroSection';
+import { createExtrasSections, initExtrasSections } from '../../components/servicesExtras/servicesExtras';
 import '../../components/header/header.css';
 import '../../components/footer/footer.css';
 import '../../components/servicesGrid/servicesGrid.css';
 import '../../components/heroSection/heroSection.css';
+import '../../components/servicesExtras/servicesExtras.css';
 
 export async function mountServices(root: HTMLElement) {
   // إنشاء fragment لتجميع العناصر
@@ -26,6 +28,8 @@ export async function mountServices(root: HTMLElement) {
    
    // إضافة سيكشن الخدمات
    mainContent.insertAdjacentHTML('beforeend', createServicesGrid());
+  // إضافة 3 سكاشن عصرية مع انيميشن بعد السيكشن الأخير
+  mainContent.insertAdjacentHTML('beforeend', createExtrasSections());
    frag.appendChild(mainContent);
 
   // إضافة الفوتر
@@ -38,6 +42,7 @@ export async function mountServices(root: HTMLElement) {
   initHeader();
   initHeroSection();
   initServicesGrid();
+  initExtrasSections();
   initFooter();
 }
 

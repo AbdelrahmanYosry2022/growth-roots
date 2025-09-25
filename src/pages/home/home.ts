@@ -5,6 +5,8 @@ import { initHeroSlider } from '../../components/hero/sliderInit';
 import { createFooter, initFooter } from '../../components/footer/footer';
 import { createStacked, initStacked } from '../../components/stacked/stacked';
 import './standaloneShowcase.css';
+import './home-extras.css';
+import './modern-sections.css';
 
 // إدراج GSAP ديناميكيًا لنسخة من النمط المستقل
 let gsap: any;
@@ -206,6 +208,384 @@ async function initStandaloneAnimations() {
   }
 }
 
+// ----------------------
+// Modern Sections - ثلاثة سكاشن عصرية جديدة
+// ----------------------
+
+// السكشن الأول: الإحصائيات مع أنيميشن العدادات
+function createStatsSection(): HTMLElement {
+  const section = document.createElement('section');
+  section.className = 'stats-section animate-on-scroll';
+  
+  section.innerHTML = `
+    <div class="stats-container">
+      <div class="stats-header">
+        <span class="stats-badge">إنجازاتنا بالأرقام</span>
+        <h2 class="stats-title">خبرة تتحدث عن نفسها</h2>
+        <p class="stats-subtitle">أكثر من عقدين من الخبرة في تأسيس وتطوير مصانع الأغذية والبروتينات</p>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card">
+          <span class="stat-number" data-target="20">0</span>
+          <h3 class="stat-label">سنة خبرة</h3>
+          <p class="stat-description">في مجال الصناعات الغذائية والبروتينية</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" data-target="150">0</span>
+          <h3 class="stat-label">مشروع منجز</h3>
+          <p class="stat-description">من المصانع والخطوط الإنتاجية المتكاملة</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" data-target="50">0</span>
+          <h3 class="stat-label">عميل راضي</h3>
+          <p class="stat-description">يثقون في خدماتنا وحلولنا المتكاملة</p>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number" data-target="95">0</span>
+          <h3 class="stat-label">% نسبة النجاح</h3>
+          <p class="stat-description">في تسليم المشاريع في الوقت المحدد</p>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  return section;
+}
+
+// السكشن الثاني: الخدمات التفاعلية
+function createInteractiveServicesSection(): HTMLElement {
+  const section = document.createElement('section');
+  section.className = 'services-section animate-on-scroll';
+  
+  section.innerHTML = `
+    <div class="services-container">
+      <div class="services-header">
+        <span class="stats-badge">خدماتنا المتميزة</span>
+        <h2 class="stats-title">حلول شاملة لكل احتياجاتك</h2>
+        <p class="stats-subtitle">نقدم مجموعة متكاملة من الخدمات لضمان نجاح مشروعك الصناعي</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <img src="/licensed-image.jpeg" alt="تأسيس المصانع" class="service-image" loading="lazy">
+          <div class="service-content">
+            <div class="service-icon">🏭</div>
+            <h3 class="service-title">تأسيس المصانع</h3>
+            <p class="service-description">نقدم خدمات شاملة لتأسيس المصانع من الصفر بأحدث التقنيات والمعايير العالمية.</p>
+            <ul class="service-features">
+              <li>دراسات الجدوى الاقتصادية</li>
+              <li>التصميم الهندسي المتكامل</li>
+              <li>الحصول على التراخيص</li>
+            </ul>
+            <button class="service-cta">اطلب استشارة</button>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="/licensed-image (1).jpeg" alt="توريد المعدات" class="service-image" loading="lazy">
+          <div class="service-content">
+            <div class="service-icon">⚙️</div>
+            <h3 class="service-title">توريد المعدات</h3>
+            <p class="service-description">نوفر أحدث المعدات والخطوط الإنتاجية من أفضل الشركات العالمية.</p>
+            <ul class="service-features">
+              <li>معدات عالية الجودة</li>
+              <li>تركيب وتشغيل</li>
+              <li>صيانة وضمان</li>
+            </ul>
+            <button class="service-cta">تصفح المعدات</button>
+          </div>
+        </div>
+        <div class="service-card">
+          <img src="/licensed-image (2).jpeg" alt="إدارة التشغيل" class="service-image" loading="lazy">
+          <div class="service-content">
+            <div class="service-icon">📊</div>
+            <h3 class="service-title">إدارة التشغيل</h3>
+            <p class="service-description">نساعدك في إدارة وتشغيل مصنعك بكفاءة عالية لضمان أقصى ربحية.</p>
+            <ul class="service-features">
+              <li>تحسين العمليات</li>
+              <li>إدارة الجودة</li>
+              <li>تدريب الفرق</li>
+            </ul>
+            <button class="service-cta">ابدأ الآن</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  return section;
+}
+
+// السكشن الثالث: شهادات العملاء مع carousel
+function createTestimonialsCarousel(): HTMLElement {
+  const section = document.createElement('section');
+  section.className = 'testimonials-section animate-on-scroll';
+  
+  section.innerHTML = `
+    <div class="testimonials-container">
+      <div class="testimonials-header">
+        <span class="stats-badge">آراء عملائنا</span>
+        <h2 class="stats-title">قصص نجاح حقيقية</h2>
+        <p class="stats-subtitle">اكتشف كيف ساعدنا عملاءنا في تحقيق أهدافهم وتطوير أعمالهم</p>
+      </div>
+      <div class="testimonials-carousel">
+        <div class="testimonials-track">
+          <div class="testimonial-slide">
+            <div class="testimonial-quote">
+              منذ تعاوننا مع جروث روتس، تحسن الأداء التشغيلي لمصنعنا بشكل ملحوظ. فريق محترف ومتخصص يقدم حلولاً عملية ومبتكرة.
+            </div>
+            <div class="testimonial-author">
+              <img src="/logo/Asset%201.svg" alt="مصنع دلتا" class="author-avatar">
+              <div class="author-info">
+                <h4>أحمد محمد</h4>
+                <p>مدير عام - مصنع دلتا للأغذية</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <div class="testimonial-quote">
+              دعم شامل بدءاً من التصميم وحتى التشغيل. فريق جروث روتس محترف ويتميز بالالتزام والجودة في التنفيذ.
+            </div>
+            <div class="testimonial-author">
+              <img src="/logo/Asset%202.svg" alt="شركة النخبة" class="author-avatar">
+              <div class="author-info">
+                <h4>سارة أحمد</h4>
+                <p>مديرة المشاريع - شركة النخبة</p>
+              </div>
+            </div>
+          </div>
+          <div class="testimonial-slide">
+            <div class="testimonial-quote">
+              تعاون مرن وسريع أدى إلى خفض فترات الإطلاق بنسبة كبيرة. نوصي بشدة بخدمات جروث روتس لأي مستثمر في القطاع الغذائي.
+            </div>
+            <div class="testimonial-author">
+              <img src="/licensed-image.jpeg" alt="مصنع الكوثر" class="author-avatar">
+              <div class="author-info">
+                <h4>محمد علي</h4>
+                <p>المدير التنفيذي - مصنع الكوثر</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn prev-btn">‹</button>
+          <button class="carousel-btn next-btn">›</button>
+        </div>
+        <div class="carousel-indicators">
+          <span class="indicator active" data-slide="0"></span>
+          <span class="indicator" data-slide="1"></span>
+          <span class="indicator" data-slide="2"></span>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  return section;
+}
+
+// ----------------------
+// New home extra sections
+// ----------------------
+function createHomeExtras(): DocumentFragment {
+  const frag = document.createDocumentFragment();
+
+  // 1) Feature cards strip
+  const features = document.createElement('section');
+  features.className = 'home-extras features-strip reveal-on-scroll';
+  features.innerHTML = `
+    <div class="container">
+      <h2 class="hx-title">حلولنا المؤثرة</h2>
+      <div class="cards-grid">
+        <article class="card">
+          <div class="card-media"><img src="/licensed-image.jpeg" alt="حلول تشغيل" loading="lazy"></div>
+          <div class="card-body">
+            <h3>تصميم وتشغيل خطوط إنتاج</h3>
+            <p>نخطط وننفذ خطوط إنتاج متوافقة مع احتياجات مصنعك لتقليل الهدر وزيادة الإنتاجية.</p>
+            <div class="card-cta"><button class="btn-primary small">اطلع أكثر</button></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-media"><img src="/licensed-image (1).jpeg" alt="توريد معدات" loading="lazy"></div>
+          <div class="card-body">
+            <h3>توريد وتجهيز معدات</h3>
+            <p>توريد معدات موثوقة مع تركيب ومتابعة تشغيل مبدئية لإطلاق سلس.</p>
+            <div class="card-cta"><button class="btn-primary small">اطلع أكثر</button></div>
+          </div>
+        </article>
+        <article class="card">
+          <div class="card-media"><img src="/licensed-image (2).jpeg" alt="تطوير منتجات" loading="lazy"></div>
+          <div class="card-body">
+            <h3>تطوير منتجات وبراهين مفهوم</h3>
+            <p>خبرتنا تساعدك على طرح منتجات عملية تناسب السوق والمصنع.</p>
+            <div class="card-cta"><button class="btn-primary small">اطلع أكثر</button></div>
+          </div>
+        </article>
+      </div>
+    </div>
+  `;
+  frag.appendChild(features);
+
+  // 2) Why-us split with subtle parallax image
+  const why = document.createElement('section');
+  why.className = 'home-extras why-us reveal-on-scroll';
+  why.innerHTML = `
+    <div class="container why-grid">
+      <div class="why-media" aria-hidden="true">
+        <div class="parallax-wrap"><img src="/unnamed (1).png" alt="دعم تشغيلي" loading="lazy"></div>
+      </div>
+      <div class="why-content">
+        <span class="hx-badge">لماذا جروث روتس</span>
+        <h2>شريكك من الفكرة إلى التشغيل</h2>
+        <p class="lead">نقدّم نهجاً متكاملاً يجمع بين الهندسة والتشغيل وجودة المنتج لنرفع جاهزية منشأتك التشغيلية بأسرع وقت.</p>
+        <ul class="why-list">
+          <li>دراسات جدوى متعمقة</li>
+          <li>تصميم خطوط إنتاج مرن</li>
+          <li>تدريب ورفع كفاءة الفرق</li>
+        </ul>
+      </div>
+    </div>
+  `;
+  frag.appendChild(why);
+
+  // 3) Testimonials / rotating quote
+  const quotes = document.createElement('section');
+  quotes.className = 'home-extras quotes reveal-on-scroll';
+  quotes.innerHTML = `
+    <div class="container">
+      <h2 class="hx-title">آراء شركائنا</h2>
+      <div class="quote-slider" data-slide="0">
+        <blockquote class="quote active">"منذ تعاوننا مع جروث روتس تحسّن الأداء التشغيلي بشكل ملحوظ"<cite>— مصنع دلتا للأغذية</cite></blockquote>
+        <blockquote class="quote">"دعم شامل بدءاً من التصميم وحتى التشغيل — فريق محترف"<cite>— شركة النخبة</cite></blockquote>
+        <blockquote class="quote">"تعاون مرن وسريع أدى إلى خفض فترات الإطلاق بنسبة كبيرة"<cite>— مصنع الكوثر</cite></blockquote>
+      </div>
+    </div>
+  `;
+  frag.appendChild(quotes);
+
+  return frag;
+}
+
+// تهيئة السكاشن العصرية الجديدة
+function initModernSections(): void {
+  // Intersection Observer للأنيميشن عند الظهور
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      const el = entry.target as HTMLElement;
+      if (entry.isIntersecting) {
+        el.classList.add('in-view');
+        
+        // تشغيل أنيميشن العدادات
+        if (el.classList.contains('stats-section')) {
+          animateCounters(el);
+        }
+      }
+    });
+  }, { threshold: 0.2 });
+
+  // مراقبة السكاشن الجديدة
+  document.querySelectorAll('.animate-on-scroll').forEach(el => observer.observe(el));
+  
+  // تهيئة carousel الشهادات
+  initTestimonialsCarousel();
+}
+
+// أنيميشن العدادات
+function animateCounters(section: HTMLElement): void {
+  const counters = section.querySelectorAll('.stat-number');
+  
+  counters.forEach((counter) => {
+    const target = parseInt(counter.getAttribute('data-target') || '0');
+    const duration = 2000; // 2 ثانية
+    const increment = target / (duration / 16); // 60fps
+    let current = 0;
+    
+    counter.classList.add('counting');
+    
+    const timer = setInterval(() => {
+      current += increment;
+      if (current >= target) {
+        current = target;
+        clearInterval(timer);
+      }
+      counter.textContent = Math.floor(current).toString();
+    }, 16);
+  });
+}
+
+// تهيئة carousel الشهادات
+function initTestimonialsCarousel(): void {
+  const carousel = document.querySelector('.testimonials-carousel');
+  if (!carousel) return;
+  
+  const track = carousel.querySelector('.testimonials-track') as HTMLElement;
+  const slides = carousel.querySelectorAll('.testimonial-slide');
+  const prevBtn = carousel.querySelector('.prev-btn');
+  const nextBtn = carousel.querySelector('.next-btn');
+  const indicators = carousel.querySelectorAll('.indicator');
+  
+  let currentSlide = 0;
+  const totalSlides = slides.length;
+  
+  function updateCarousel() {
+    const translateX = -currentSlide * 100;
+    track.style.transform = `translateX(${translateX}%)`;
+    
+    // تحديث المؤشرات
+    indicators.forEach((indicator, index) => {
+      indicator.classList.toggle('active', index === currentSlide);
+    });
+  }
+  
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateCarousel();
+  }
+  
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
+  }
+  
+  // أحداث الأزرار
+  nextBtn?.addEventListener('click', nextSlide);
+  prevBtn?.addEventListener('click', prevSlide);
+  
+  // أحداث المؤشرات
+  indicators.forEach((indicator, index) => {
+    indicator.addEventListener('click', () => {
+      currentSlide = index;
+      updateCarousel();
+    });
+  });
+  
+  // تشغيل تلقائي
+  setInterval(nextSlide, 5000);
+}
+
+function initHomeExtras(): void {
+  // reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, idx) => {
+      const el = entry.target as HTMLElement;
+      if (entry.isIntersecting) {
+        el.classList.add('in-view');
+      }
+    });
+  }, { threshold: 0.18 });
+
+  document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+
+  // simple quote slider
+  const slider = document.querySelector('.quote-slider');
+  if (slider) {
+    const quotes = Array.from(slider.querySelectorAll('.quote')) as HTMLElement[];
+    let i = 0;
+    setInterval(() => {
+      quotes[i].classList.remove('active');
+      i = (i + 1) % quotes.length;
+      quotes[i].classList.add('active');
+    }, 4200);
+  }
+}
+
 export async function mountHome(root: HTMLElement) {
   const frag = document.createDocumentFragment();
 
@@ -222,6 +602,14 @@ export async function mountHome(root: HTMLElement) {
   // إضافة مكون stacked
   frag.appendChild(createStacked());
 
+  // إضافة home extras
+  frag.appendChild(createHomeExtras());
+
+  // إضافة السكاشن العصرية الجديدة
+  frag.appendChild(createStatsSection());
+  frag.appendChild(createInteractiveServicesSection());
+  frag.appendChild(createTestimonialsCarousel());
+
   // فوتر قياسي
   frag.appendChild(createFooter());
 
@@ -234,6 +622,12 @@ export async function mountHome(root: HTMLElement) {
 
   // تهيئة مكون stacked
   initStacked();
+
+  // تهيئة home extras
+  initHomeExtras();
+
+  // تهيئة السكاشن الجديدة
+  initModernSections();
 
   // تهيئة الرسوم المتحركة للقسم المستقل
   await initStandaloneAnimations();

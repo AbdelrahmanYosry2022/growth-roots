@@ -1,0 +1,69 @@
+/* Styles for the three modern extras sections */
+.extras-sections {
+  padding: 4rem 1rem;
+  background: linear-gradient(180deg, #fff, #f7fbff);
+  margin-top: 6rem !important; /* ضمان وجود مسافة فاصلة واضحة دائماً */
+}
+.extras-sections .container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.extras-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.6rem;
+  box-shadow: 0 8px 30px rgba(20, 30, 60, 0.06);
+  transform: translateY(18px) scale(0.995);
+  opacity: 0;
+  transition: transform 520ms cubic-bezier(.2,.9,.2,1), opacity 420ms ease, box-shadow 280ms ease;
+  overflow: hidden;
+}
+
+.extras-card.in-view {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.extras-card .card-inner h2 {
+  margin: 0 0 .6rem 0;
+  font-size: 1.5rem;
+  color: #0b2447;
+}
+.extras-card .card-inner p { color: #254060; margin-bottom: .9rem; }
+
+.extras--features .features-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
+.extras--features .features-list li { background: linear-gradient(90deg, rgba(3,102,214,0.06), rgba(3,102,214,0.03)); padding: .6rem; border-radius: 8px; }
+
+.stats-grid { display: flex; gap: 1.2rem; justify-content: space-between; }
+.stat { text-align: center; flex: 1; }
+.stat-number { font-size: 2rem; font-weight: 700; color: #0366d6; }
+.stat-label { color: #5b788d; font-size: .95rem; }
+
+.extras--cta { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.extras--cta .cta-actions { display:flex; gap: .8rem; }
+.btn { display: inline-block; padding: .6rem 1rem; border-radius: 10px; text-decoration: none; font-weight: 600; }
+.btn-primary { background: #0366d6; color: white; box-shadow: 0 8px 18px rgba(3,102,214,0.18); }
+.btn-outline { border: 1px solid #cfe4ff; color: #0366d6; background: transparent; }
+
+/* Responsive */
+@media (min-width: 720px) {
+  .extras-sections .container { grid-template-columns: repeat(3, 1fr); }
+  .extras--cta { flex-direction: column; align-items: flex-start; }
+}
+
+/* small flourish animation */
+.extras-card:before {
+  content: '';
+  position: absolute;
+  left: -30%;
+  top: -40%;
+  width: 70%;
+  height: 160%;
+  background: radial-gradient(circle at 20% 20%, rgba(3,102,214,0.06), transparent 30%);
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
